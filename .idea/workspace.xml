@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/config/swagger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/generate-swagger.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/types/film.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.eslintrc.cjs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/deployment-branches.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/github-pages-deploy.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/application.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eslint.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/tonconnect-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/tonconnect-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DisplayData/DisplayData.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DisplayData/DisplayData.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EnvUnsupported.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ErrorBoundary.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Link/Link.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Link/Link.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RGB/RGB.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RGB/RGB.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Root.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/bem.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/css/classnames.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/publicUrl.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/init.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mockEnv.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/navigation/routes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/IndexPage/IndexPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/IndexPage/ton.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/InitDataPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/LaunchParamsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TONConnectPage/TONConnectPage.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/TONConnectPage/TONConnectPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/ThemeParamsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.node.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+        <option value="tsconfig.json" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubDefaultAccount">
+    <option name="defaultAccountId" value="40b1852f-2b50-417d-bd19-1f5ab4e9c271" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="34egARE01VEEvrXkDozvfwyf9N8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/netwo/Documenti/CinofiloDelCazzo&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\netwo\\Documenti\\CinofiloDelCazzo\\backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend" />
+      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\public" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="" />
+      <created>1761579307193</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761579307193</updated>
+      <workItem from="1761579308949" duration="961000" />
+      <workItem from="1761580553681" duration="4455000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
