@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { DatabaseService } from '../services/database';
-import { CreateFilmRequest, UpdateFilmRequest } from '../types/film';
+import { CreateFilmRequest, UpdateFilmRequest } from '../../../types/film';
 
 export class FilmController {
 	private dbService: DatabaseService;

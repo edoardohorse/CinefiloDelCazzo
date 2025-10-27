@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import { Film, FilmType } from '../types/film';
+import { Film, FilmType } from '../../../types/film';
 import path from 'path';
 
 const DB_PATH = path.join(__dirname, '../../films.db');

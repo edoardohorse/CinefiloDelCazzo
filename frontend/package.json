@@ -15,9 +15,11 @@
     "predeploy": "npm run build"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.90.5",
     "@telegram-apps/telegram-ui": "^2.1.9",
     "@tma.js/sdk-react": "^3.0.7",
     "@tonconnect/ui-react": "^2.2.0",
+    "axios": "^1.13.0",
     "eruda": "^3.4.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
