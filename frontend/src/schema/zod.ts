@@ -8,6 +8,7 @@ const baseFilmSchema = z.object({
 	endDate: z.string().nullable().optional(),
 	type: z.nativeEnum(FilmType),
 	description: z.string().max(1000, 'Description is too long').nullable().optional(),
+	links: z.array(z.string()).optional(),
 });
 
 // Create film schema (includes thumbnail as required)

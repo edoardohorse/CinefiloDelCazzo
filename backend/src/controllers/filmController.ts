@@ -26,7 +26,6 @@ export class FilmController {
 			return {res: false, data: null};
 		}
 
-
 		if(body.name === undefined) {
 			res.status(400).json({
 				error: 'Missing required fields: name'
@@ -69,7 +68,8 @@ export class FilmController {
 			releaseDate: new Date(filmData.releaseDate),
 			endDate: filmData.endDate ? new Date(filmData.endDate) : null,
 			type: filmData.type,
-			description: filmData.description || null
+			description: filmData.description || null,
+			links: filmData.links || []
 		};
 
 		return {res: true, data: film}

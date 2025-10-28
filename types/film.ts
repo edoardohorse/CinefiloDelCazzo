@@ -11,6 +11,7 @@ export interface Film {
 	endDate: Date | null;
 	type: FilmType;
 	description: string | null;
+	links?: Array<string>;
 }
 
 export interface CreateFilmRequest {
@@ -20,6 +21,7 @@ export interface CreateFilmRequest {
 	endDate?: string | null;
 	type: FilmType;
 	description?: string | null;
+	links?: Array<string>;
 }
 
 
@@ -30,4 +32,5 @@ export interface UpdateFilmRequest {
 	endDate?: string | null;
 	type?: FilmType;
 	description?: string | null;
+	links?: Array<string>;
 }

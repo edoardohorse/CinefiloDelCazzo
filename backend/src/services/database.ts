@@ -24,18 +24,19 @@ export class DatabaseService {
 
 	private init(): void {
 		const createTableSQL = `
-      CREATE TABLE IF NOT EXISTS films (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        thumbnail BLOB NULL,
-        releaseDate DATETIME NOT NULL,
-        endDate DATETIME,
-        type TEXT CHECK(type IN ('film', 'anime')) NOT NULL,
-        description TEXT,
-        createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-        updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `;
+			CREATE TABLE IF NOT EXISTS films (
+			 id INTEGER PRIMARY KEY AUTOINCREMENT,
+			 name TEXT NOT NULL,
+			 thumbnail BLOB NULL,
+			 releaseDate DATETIME NOT NULL,
+			 endDate DATETIME,
+			 type TEXT CHECK(type IN ('film', 'anime')) NOT NULL,
+			 description TEXT,
+			 links TEXT, -- Store JSON array of strings
+			 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
+			 updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
+			)
+		`;
 
 		this.db.run(createTableSQL, (err) => {
 			if (err) {
@@ -50,14 +51,21 @@ export class DatabaseService {
 	createFilm(film: Omit<Film, 'id'>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			const sql = `
-        INSERT INTO films (name, thumbnail, releaseDate, endDate, type, description)
-        VALUES (?, ?, ?, ?, ?, ?)
-      `;
+				INSERT INTO films (name, thumbnail, releaseDate, endDate, type, description, links)
+				VALUES (?, ?, ?, ?, ?, ?, ?)
+			`;
 
 			this.db.run(
 				sql,
-				[film.name, film.thumbnail, film.releaseDate.toISOString(),
-					film.endDate ? film.endDate.toISOString() : null, film.type, film.description],
+				[
+					film.name,
+					film.thumbnail,
+					film.releaseDate.toISOString(),
+					film.endDate ? film.endDate.toISOString() : null,
+					film.type,
+					film.description,
+					JSON.stringify(film.links || []) // Store links as JSON string
+				],
 				function(err) {
 					if (err) {
 						reject(err);
@@ -85,7 +93,8 @@ export class DatabaseService {
 						releaseDate: new Date(row.releaseDate),
 						endDate: row.endDate ? new Date(row.endDate) : null,
 						type: row.type as FilmType,
-						description: row.description
+						description: row.description,
+						links: row.links ? JSON.parse(row.links) : [] // Parse JSON back to array
 					}));
 					resolve(films);
 				}
@@ -111,7 +120,8 @@ export class DatabaseService {
 						releaseDate: new Date(row.releaseDate),
 						endDate: row.endDate ? new Date(row.endDate) : null,
 						type: row.type as FilmType,
-						description: row.description
+						description: row.description,
+						links: row.links ? JSON.parse(row.links) : [] // Parse JSON back to array
 					};
 					resolve(film);
 				}
@@ -148,6 +158,10 @@ export class DatabaseService {
 			if (film.description !== undefined) {
 				fields.push('description = ?');
 				values.push(film.description);
+			}
+			if (film.links !== undefined) {
+				fields.push('links = ?');
+				values.push(JSON.stringify(film.links)); // Store links as JSON string
 			}
 
 			fields.push('updatedAt = CURRENT_TIMESTAMP');

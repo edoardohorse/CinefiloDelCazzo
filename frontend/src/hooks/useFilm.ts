@@ -74,6 +74,12 @@ export const useFormFilm = () => {
 		setShowSnackbarField(false)
 	}
 
+	const onChangeLinks = (mapLinks: Array<string>)=>{
+		form.setValue("links", mapLinks);
+	}
+
+	const links = form.watch("links") ?? []
+
 	useEffect(function onSuccessSendForm() {
 		if(isSuccess){
 			form.clearErrors()
@@ -96,6 +102,8 @@ export const useFormFilm = () => {
 		isSuccess,
 		isPending,
 		reset,
+		links,
+		onChangeLinks,
 		snackBar:{
 			bShowSnakbarFormSuccess: bShowSnackbarFormSuccess,
 			bShowSnackbarField,
