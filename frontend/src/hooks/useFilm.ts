@@ -4,7 +4,7 @@ import {Film, FilmType} from "../../../types/film";
 import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {ChangeEvent} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 
 export const useFilm = {
 	fetchAll: ()=> {
@@ -22,6 +22,9 @@ export const useFilm = {
 
 
 export const useFormFilm = () => {
+	const [bShowSnackbarFormSuccess, setShowSnackbarFormSuccess] = useState<boolean>(false)
+	const [bShowSnackbarField, setShowSnackbarField] = useState<boolean>(false)
+
 	const form = useForm<CreateFilmFormData>({
 		resolver: zodResolver(createFilmSchema),
 		defaultValues: {
@@ -31,7 +34,9 @@ export const useFormFilm = () => {
 		},
 	});
 
-	const {mutateAsync} = useFilm.createFilm()
+	const hasErrors = Object.keys(form.formState.errors).length > 0;
+
+	const {mutateAsync, isSuccess, isPending} = useFilm.createFilm()
 
 	const handleCreateFilm = async (data: CreateFilmFormData) => {
 		// Convert File to Buffer if needed for your API
@@ -62,10 +67,40 @@ export const useFormFilm = () => {
 		}
 	}
 
+	const reset = ()=>{
+		form.clearErrors()
+		form.reset()
+		setShowSnackbarFormSuccess(false)
+		setShowSnackbarField(false)
+	}
+
+	useEffect(function onSuccessSendForm() {
+		if(isSuccess){
+			form.clearErrors()
+			form.reset()
+			setShowSnackbarFormSuccess(true)
+		}
+	}, [isSuccess]);
+
+	useEffect(function onErrorSendForm() {
+		if(hasErrors){
+			setShowSnackbarField(true)
+		}
+	}, [hasErrors]);
+
 	return {
 		form,
 		handleCreateFilm,
 		onSwitchAnime,
 		onUpload,
+		isSuccess,
+		isPending,
+		reset,
+		snackBar:{
+			bShowSnakbarFormSuccess: bShowSnackbarFormSuccess,
+			bShowSnackbarField,
+			setShowSnackbarField,
+			setShowSnakbarFormSuccess: setShowSnackbarFormSuccess
+		}
 	}
 }

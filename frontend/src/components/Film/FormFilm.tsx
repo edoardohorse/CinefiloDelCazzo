@@ -7,7 +7,7 @@ import {
 	List,
 	Button,
 	FixedLayout,
-	Badge
+	Badge, Snackbar
 } from "@telegram-apps/telegram-ui";
 import {useState} from "react";
 import { useFormFilm} from "@/hooks/useFilm";
@@ -15,21 +15,22 @@ import { useFormFilm} from "@/hooks/useFilm";
 const FormFilm = () => {
 	const [bEndDate, setEndDate] = useState<boolean>(false)
 
-	const {form, handleCreateFilm, onSwitchAnime, onUpload } = useFormFilm();
+	const {form, handleCreateFilm, onSwitchAnime, onUpload, isPending, snackBar,reset } = useFormFilm();
 	const {
 		watch,
 		formState: {errors, isDirty},
 		register,
-		handleSubmit
+		handleSubmit,
 	} = form
 
 	const nFileUploaded = watch("thumbnail") == undefined ? 0 : 1;
+
 
 	return (
 		<List>
 			<form onSubmit={handleSubmit(handleCreateFilm)}>
 				{/*Name*/}
-				<Input {...register('name')} header="Nome" placeholder="Nome film" type="text" status={errors.name && "error"}/>
+				<Input {...register('name')} header="Nome *" placeholder="Nome film" type="text" status={errors.name && "error"}/>
 
 				{/*Anime*/}
 				<Cell Component="label" after={<Switch onChange={onSwitchAnime}/>}>
@@ -37,7 +38,7 @@ const FormFilm = () => {
 				</Cell>
 
 				{/*Data uscita*/}
-				<Input {...register("releaseDate")} header="Data d'uscita" type="date" status={errors.releaseDate && "error"}/>
+				<Input {...register("releaseDate")} header="Data d'uscita *" type="date" status={errors.releaseDate && "error"}/>
 
 				{/*Data fine*/}
 				<Cell Component="label" after={<Switch onChange={() => setEndDate(!bEndDate)}/>}>
@@ -47,9 +48,9 @@ const FormFilm = () => {
 
 				{/*File*/}
 				<div style={{display: "flex", alignItems: "center"}}>
-						<FileInput label={"Thumbnail"} onChange={onUpload} className={"test"}/>
+						<FileInput label={"Thumbnail *"} onChange={onUpload} className={"test"}/>
 						{errors.thumbnail && (
-							<Text>{errors.thumbnail.message}</Text>
+							<Text style={{color:"red"}}>{errors.thumbnail.message}</Text>
 						)}
 						{nFileUploaded != 0 &&
 		          <Cell>
@@ -60,19 +61,31 @@ const FormFilm = () => {
 				</div>
 
 
-				<FixedLayout vertical="bottom" style={{ padding: "1em"}}>
+				<FixedLayout vertical="bottom" style={{ padding: "1em", display: "flex", alignItems: "center", gap: "1em" }}>
 					<Button
-						mode="filled"
+						mode="bezeled"
 						size="l"
-						disabled={!isDirty}
-						stretched
+						disabled={!isDirty || isPending}
 						type="submit"
+						loading={isPending}
+						style={{flex: 1}}
 					>
 						Aggiungi film
 					</Button>
+					<Button mode={"outline"} size={"l"} onClick={reset} >Reset</Button>
 				</FixedLayout>
-
 			</form>
+
+			{snackBar.bShowSnakbarFormSuccess &&
+				<Snackbar
+					duration={3000}
+					description={"Film inviato con successo"}
+					onClose={()=>{snackBar.setShowSnakbarFormSuccess(false)}}>Form</Snackbar>}
+
+			{snackBar.bShowSnackbarField &&
+				<Snackbar duration={3000}
+						  description={"Compila i campi"}
+						  onClose={()=>{snackBar.setShowSnackbarField(false)}}>Form</Snackbar>}
 		</List>
 	)
 }
