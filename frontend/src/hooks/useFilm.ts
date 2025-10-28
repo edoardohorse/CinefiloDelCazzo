@@ -1,7 +1,10 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {createFilm, fetchAllFilm, QUERY_FN_FETCH_FILM} from "@/api/api";
-import { Film} from "../../../types/film";
-
+import {Film, FilmType} from "../../../types/film";
+import {useForm} from "react-hook-form";
+import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {ChangeEvent} from "react";
 
 export const useFilm = {
 	fetchAll: ()=> {
@@ -12,8 +15,57 @@ export const useFilm = {
 	},
 	createFilm: ()=>{
 		return useMutation({
-			mutationFn: (film: Film) => createFilm(film)
+			mutationFn: (film: CreateFilmFormData) => createFilm(film)
 		})
-	}
+	},
 }
 
+
+export const useFormFilm = () => {
+	const form = useForm<CreateFilmFormData>({
+		resolver: zodResolver(createFilmSchema),
+		defaultValues: {
+			type: FilmType.FILM,
+			endDate: null,
+			description: null,
+		},
+	});
+
+	const {mutateAsync} = useFilm.createFilm()
+
+	const handleCreateFilm = async (data: CreateFilmFormData) => {
+		// Convert File to Buffer if needed for your API
+		const thumbnailBuffer = await data.thumbnail.arrayBuffer();
+
+		const createFilmRequest = {
+			...data,
+			thumbnail: thumbnailBuffer,
+		};
+
+		console.log('Creating film:', createFilmRequest);
+		// Call your API here
+		await mutateAsync(data)
+	};
+
+	const onSwitchAnime = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.checked) {
+			form.setValue("type", "anime" as FilmType)
+		} else {
+			form.setValue("type", "film" as FilmType)
+		}
+	}
+
+	const onUpload = (e: ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files.length > 0) {
+			form.clearErrors("thumbnail")
+			form.setValue("thumbnail", e.target.files[0])
+		}
+	}
+
+	return {
+		form,
+		handleCreateFilm,
+		onSwitchAnime,
+		onUpload,
+	}
+}

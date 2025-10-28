@@ -1,6 +1,6 @@
 
 import api from "@/config/axios";
-import {Film} from "../../../types/film";
+import {CreateFilmFormData} from "@/schema/zod";
 
 export const QUERY_FN_FETCH_FILM = '/films';
 
@@ -9,7 +9,7 @@ export async function fetchAllFilm(){
 	return data;
 }
 
-export async function createFilm(film: Film){
+export async function createFilm(film: CreateFilmFormData){
 	const {data} = await api.post(QUERY_FN_FETCH_FILM, film,{
 		headers: {
 			'Content-Type': 'multipart/form-data',

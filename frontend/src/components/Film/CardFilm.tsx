@@ -1,4 +1,4 @@
-import {Film} from "../../../../types/film";
+import {Film} from "../../../../types";
 import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";

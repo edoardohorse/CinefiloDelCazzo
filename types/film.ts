@@ -25,7 +25,7 @@ export interface CreateFilmRequest {
 
 export interface UpdateFilmRequest {
 	name?: string;
-	thumbnail?: Buffer;
+	thumbnail?: Blob;
 	releaseDate?: string;
 	endDate?: string | null;
 	type?: FilmType;

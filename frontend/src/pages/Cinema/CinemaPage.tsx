@@ -1,6 +1,6 @@
 import type {FC} from 'react';
 import {useFilm} from "@/hooks/useFilm";
-import {CardFilm} from "@/pages/Cinema/CardFilm";
+import {CardFilm} from "@/components/Film/CardFilm";
 import {Spinner, Text} from "@telegram-apps/telegram-ui";
 
 export const CinemaPage: FC = () => {
