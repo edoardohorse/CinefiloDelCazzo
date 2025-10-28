@@ -1,13 +1,26 @@
-import type { FC} from 'react';
+import type {FC} from 'react';
 import {useFilm} from "@/hooks/useFilm";
 import {CardFilm} from "@/pages/Cinema/CardFilm";
+import {Spinner, Text} from "@telegram-apps/telegram-ui";
 
 export const CinemaPage: FC = () => {
-	const {data} = useFilm.fetchAll()
+    const {data, isFetching} = useFilm.fetchAll()
 
-  return (
-		<>
-	    {data?.map(film => <CardFilm film={film} key={film.id}/>)}
-		</>
-  );
+    if (isFetching) {
+        return (
+            <Spinner size="l"/>
+        )
+    }
+
+    if (data?.length == 0) {
+        return (
+            <Text>Nessun film</Text>
+        )
+    }
+
+    return (
+        <>
+            {data?.map(film => <CardFilm film={film} key={film.id}/>)}
+        </>
+    );
 };

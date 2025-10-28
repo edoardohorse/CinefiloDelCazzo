@@ -1,6 +1,13 @@
-import { Request, Response } from 'express';
-import { DatabaseService } from '../services/database';
-import { CreateFilmRequest, UpdateFilmRequest } from '../../../types/film';
+import type { Request, Response } from 'express';
+import { DatabaseService } from '../services/database.ts';
+import type {CreateFilmRequest, Film, UpdateFilmRequest} from '../../../types/film.ts';
+
+interface CreateFilmRequestWithFiles extends Request {
+	body: CreateFilmRequest;
+	files: {
+		thumbnail: Express.Multer.File[];
+	};
+}
 
 export class FilmController {
 	private dbService: DatabaseService;
@@ -9,34 +16,73 @@ export class FilmController {
 		this.dbService = new DatabaseService();
 	}
 
+	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
+		const {body, files} = req;
+		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+
+		if(body == undefined) {
+			console.error('Error creating film: body is empty');
+			res.status(500).json({ error: 'Internal server error' });
+			return {res: false, data: null};
+		}
+
+
+		if(body.name === undefined) {
+			res.status(400).json({
+				error: 'Missing required fields: name'
+			});
+			return {res: false, data: null};
+		}
+		if(body.name.trim() === ''){
+			res.status(400).json({
+				error: 'Name is empty'
+			});
+			return {res: false, data: null};
+		}
+
+		if(bufferThumbnail == null ) {
+			res.status(400).json({
+				error: 'Missing required fields: thumbnail'
+			});
+			return {res: false, data: null};
+		}
+
+		if(body.releaseDate === undefined) {
+			res.status(400).json({
+				error: 'Missing required fields: releaseDate'
+			});
+			return {res: false, data: null};
+		}
+
+		if(body.type === undefined) {
+			res.status(400).json({
+				error: 'Missing required fields: type'
+			});
+			return {res: false, data: null};
+		}
+
+
+		const filmData: CreateFilmRequest = req.body;
+		const film = {
+			name: filmData.name,
+			thumbnail: bufferThumbnail,
+			releaseDate: new Date(filmData.releaseDate),
+			endDate: filmData.endDate ? new Date(filmData.endDate) : null,
+			type: filmData.type,
+			description: filmData.description || null
+		};
+
+		return {res: true, data: film}
+	}
+
 	// Create a new film
-	createFilm = async (req: Request, res: Response): Promise<void> => {
+	createFilm = async (req: CreateFilmRequestWithFiles, res: Response): Promise<void> => {
 		try {
-			const filmData: CreateFilmRequest = req.body;
-
 			// Validation
-			if (!filmData.name || !filmData.thumbnail || !filmData.releaseDate || !filmData.type) {
-				res.status(400).json({
-					error: 'Missing required fields: name, thumbnail, releaseDate, type'
-				});
-				return;
+			const {res: resValidate, data:film}  = this.validateCreateFilmRequest(req, res);
+			if(!resValidate || film == null) {
+				return
 			}
-
-			if (!['film', 'anime'].includes(filmData.type)) {
-				res.status(400).json({
-					error: 'Type must be either "film" or "anime"'
-				});
-				return;
-			}
-
-			const film = {
-				name: filmData.name,
-				thumbnail: filmData.thumbnail,
-				releaseDate: new Date(filmData.releaseDate),
-				endDate: filmData.endDate ? new Date(filmData.endDate) : null,
-				type: filmData.type,
-				description: filmData.description || null
-			};
 
 			const id = await this.dbService.createFilm(film);
 			res.status(201).json({ id, message: 'Film created successfully' });
@@ -54,7 +100,8 @@ export class FilmController {
 			// Convert thumbnail buffer to base64 for JSON response
 			const filmsWithBase64 = films.map(film => ({
 				...film,
-				thumbnail: film.thumbnail.toString('base64')
+				// @ts-ignore
+				thumbnail: `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}`
 			}));
 
 			res.json(filmsWithBase64);

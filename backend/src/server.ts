@@ -1,9 +1,14 @@
 import express from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { FilmController } from './controllers/filmController';
-import swaggerOptions from './config/swagger';
+import { FilmController } from './controllers/filmController.ts';
+import swaggerOptions from './config/swagger.ts';
 import bodyParser from 'body-parser';
+import multer from 'multer';
+
+
+// Configure multer
+const upload = multer();
 
 
 const app = express();
@@ -61,7 +66,7 @@ const filmController = new FilmController();
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.post('/api/films', filmController.createFilm);
+app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.createFilm);
 
 /**
  * @swagger

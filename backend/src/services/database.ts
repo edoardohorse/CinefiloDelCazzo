@@ -1,7 +1,11 @@
 import sqlite3 from 'sqlite3';
-import { Film, FilmType } from '../../../types/film';
+import type { Film, FilmType } from '../../../types/film.ts';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const DB_PATH = path.join(__dirname, '../../films.db');
 
 export class DatabaseService {

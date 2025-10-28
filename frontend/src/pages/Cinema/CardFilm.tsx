@@ -1,5 +1,5 @@
 import {Film} from "../../../../types/film";
-import {dateFormatted} from "@/utils/stringFormatter";
+import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";
 
@@ -25,17 +25,15 @@ const CardFilm = ({film}: TCardFilmProps) => {
 	return (
 		<Card type="ambient" key={film.id}>
 			<Fragment>
-				<Card.Chip readOnly>
-					{film.type}
-				</Card.Chip>
+				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img
 					alt="Dog"
-					src={`data:image/png;base64,${film.thumbnail}`}
+					src={`${film.thumbnail}`}
 					style={{
 						display: 'block',
-						height: 308,
+						height: 400,
 						objectFit: 'cover',
-						width: 254
+						width: 300
 					}}
 				/>
 				<Card.Cell subtitle={<CardDate film={film}/>}>{film.name}</Card.Cell>
