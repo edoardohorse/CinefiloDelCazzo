@@ -4,22 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Added Frontend example">
-      <change afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/config/axios.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CardFilm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" afterDir="false" />
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Works list of film">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Film/CreateFilmForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/FormFilm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/MainPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/schema/zod.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/films.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/films.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/services/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/types/film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/film.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Root.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Root.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CardFilm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/IndexPage/IndexPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/IndexPage/ton.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/InitDataPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/LaunchParamsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/TONConnectPage/TONConnectPage.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/TONConnectPage/TONConnectPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/ThemeParamsPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/film.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +46,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="tsconfig.json" />
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
     </option>
@@ -74,6 +85,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend\src" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\types" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\public" />
@@ -94,7 +106,8 @@
       <option name="presentableId" value="Default" />
       <updated>1761579307193</updated>
       <workItem from="1761579308949" duration="961000" />
-      <workItem from="1761580553681" duration="6926000" />
+      <workItem from="1761580553681" duration="17851000" />
+      <workItem from="1761635965501" duration="79000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -120,7 +133,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761585167244</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Works list of film">
+      <option name="closed" value="true" />
+      <created>1761587771797</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761587771797</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +150,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Backend" />
     <MESSAGE value="Added Frontend example" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Frontend example" />
+    <MESSAGE value="Works list of film" />
+    <option name="LAST_COMMIT_MESSAGE" value="Works list of film" />
   </component>
 </project>

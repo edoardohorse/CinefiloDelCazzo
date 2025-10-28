@@ -3,6 +3,8 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { FilmController } from './controllers/filmController';
 import swaggerOptions from './config/swagger';
+import bodyParser from 'body-parser';
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,8 +13,8 @@ const port = process.env.PORT || 3000;
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 // Middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '20mb' }));
 
 // CORS middleware
 app.use((req, res, next) => {

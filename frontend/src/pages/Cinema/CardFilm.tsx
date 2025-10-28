@@ -20,7 +20,6 @@ const CardDate = ({film}: TCardFilmProps) => {
 	)
 }
 
-
 const CardFilm = ({film}: TCardFilmProps) => {
 
 	return (

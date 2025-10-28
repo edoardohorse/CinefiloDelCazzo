@@ -23,7 +23,7 @@ export class DatabaseService {
       CREATE TABLE IF NOT EXISTS films (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        thumbnail BLOB NOT NULL,
+        thumbnail BLOB NULL,
         releaseDate DATETIME NOT NULL,
         endDate DATETIME,
         type TEXT CHECK(type IN ('film', 'anime')) NOT NULL,

@@ -1,9 +1,12 @@
-export type FilmType = 'film' | 'anime';
+export enum FilmType{
+	FILM= "film",
+	ANIME="anime"
+};
 
 export interface Film {
 	id?: number;
 	name: string;
-	thumbnail: Buffer;
+	thumbnail?: Blob;
 	releaseDate: Date;
 	endDate: Date | null;
 	type: FilmType;
@@ -12,7 +15,7 @@ export interface Film {
 
 export interface CreateFilmRequest {
 	name: string;
-	thumbnail: Buffer;
+	thumbnail?: Blob;
 	releaseDate: string;
 	endDate?: string | null;
 	type: FilmType;
