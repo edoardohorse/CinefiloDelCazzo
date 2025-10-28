@@ -131,7 +131,8 @@ export class FilmController {
 			// Convert thumbnail buffer to base64
 			const filmWithBase64 = {
 				...film,
-				thumbnail: film.thumbnail.toString('base64')
+				// @ts-ignore
+				thumbnail: `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}`
 			};
 
 			res.json(filmWithBase64);
@@ -169,6 +170,7 @@ export class FilmController {
 			if (updateData.endDate !== undefined) filmUpdate.endDate = updateData.endDate ? new Date(updateData.endDate) : null;
 			if (updateData.type !== undefined) filmUpdate.type = updateData.type;
 			if (updateData.description !== undefined) filmUpdate.description = updateData.description;
+			if (updateData.links !== undefined) filmUpdate.description = updateData.links;
 
 			const updated = await this.dbService.updateFilm(id, filmUpdate);
 

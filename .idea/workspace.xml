@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Working getFilms and createFilm!">
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add links and ChipLinks to film">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CardFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/swagger.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +24,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
         <option value="package.json" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -62,7 +62,7 @@
     "nodejs_interpreter_path": "wsl://Ubuntu@/home/ciao/.nvm/versions/node/v24.2.0/bin/node",
     "nodejs_package_manager_path": "npm",
     "npm.start.executor": "Run",
-    "npm.start_debug.executor": "Debug",
+    "npm.start_debug.executor": "Run",
     "settings.editor.selected.configurable": "settings.nodejs",
     "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu\\home\\ciao\\CinofiloDelCazzo\\backend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -70,6 +70,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\ciao\CinofiloDelCazzo\frontend\src\components\Film" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend\src" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\types" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend" />
@@ -129,7 +130,7 @@
       <workItem from="1761579308949" duration="961000" />
       <workItem from="1761580553681" duration="17851000" />
       <workItem from="1761635965501" duration="79000" />
-      <workItem from="1761641892770" duration="7118000" />
+      <workItem from="1761641892770" duration="21863000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -171,7 +172,55 @@
       <option name="project" value="LOCAL" />
       <updated>1761648578064</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Working getFilms and createFilm!">
+      <option name="closed" value="true" />
+      <created>1761649337211</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1761649337211</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Splitting comnponents">
+      <option name="closed" value="true" />
+      <created>1761650341648</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1761650341648</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Splitting components">
+      <option name="closed" value="true" />
+      <created>1761650348565</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761650348565</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Splitting components">
+      <option name="closed" value="true" />
+      <created>1761650364128</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1761650364128</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add snackbar for error">
+      <option name="closed" value="true" />
+      <created>1761658267026</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1761658267026</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Add links and ChipLinks to film">
+      <option name="closed" value="true" />
+      <created>1761667875075</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1761667875075</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +231,10 @@
     <MESSAGE value="Added Frontend example" />
     <MESSAGE value="Works list of film" />
     <MESSAGE value="Working getFilms and createFilm!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working getFilms and createFilm!" />
+    <MESSAGE value="Splitting comnponents" />
+    <MESSAGE value="Splitting components" />
+    <MESSAGE value="Add snackbar for error" />
+    <MESSAGE value="Add links and ChipLinks to film" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add links and ChipLinks to film" />
   </component>
 </project>

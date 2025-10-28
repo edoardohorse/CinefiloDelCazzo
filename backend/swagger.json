@@ -78,6 +78,12 @@
             "description": "Film description",
             "example": "A mind-bending thriller about dreams and reality"
           },
+          "links": {
+            "type": "array",
+            "nullable": true,
+            "description": "Links attachments",
+            "example": ["https://www.imdb.com/it/title/tt34812090/?ref_=fn_all_ttl_4"]
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time",
@@ -132,6 +138,11 @@
             "type": "string",
             "nullable": true,
             "example": "A mind-bending thriller about dreams and reality"
+          },
+          "links": {
+            "type":"array",
+            "nullable": true,
+            "example": ["https://www.imdb.com/it/title/tt34812090/?ref_=fn_all_ttl_4"]
           }
         }
       },
