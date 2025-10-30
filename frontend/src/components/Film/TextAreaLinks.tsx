@@ -1,16 +1,13 @@
-import {Icon16Cancel} from "@telegram-apps/telegram-ui/dist/icons/16/cancel";
-import {Chip, Textarea, Text} from "@telegram-apps/telegram-ui";
 
-type TChipLinksProps = {
+import { Textarea} from "@telegram-apps/telegram-ui";
+import {ChipLinks} from "@/components/Film/ChipLinks";
+
+type TTextAreaLinksProps = {
     links: Array<string>;
     setLinks: (links: Array<string>) => void;
 }
 
-function getHostName(link: string){
-    return (new URL(link)).hostname;
-}
-
-export const ChipLinks = (props: TChipLinksProps)=>{
+export const TextAreaLinks = (props: TTextAreaLinksProps)=>{
 
     const onPaste = async () => {
         const pastedText = await navigator.clipboard.readText();
@@ -33,13 +30,7 @@ export const ChipLinks = (props: TChipLinksProps)=>{
         <div style={{ display:"flex", flexDirection: "column", gap: "1em"}}>
             <Textarea placeholder="Incolla qui i link" onPaste={onPaste} value={""}  />
             <div style={{ display:"flex", flexDirection: "row", gap:"1em", padding: "0 1em"}}>
-                {props.links.map((link) => (
-                    <Chip key={link} mode="elevated" after={<Icon16Cancel
-                        onClick={()=>{onDelete(link)}} />}>
-                        <Text onClick={()=>window.open(link, "_blank")}>{getHostName(link)}</Text>
-                    </Chip>
-                ))
-                }
+                <ChipLinks links={props.links} onDelete={onDelete}/>
             </div>
 
         </div>

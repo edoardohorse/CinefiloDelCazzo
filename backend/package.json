@@ -8,8 +8,8 @@
     "build": "tsc",
     "start": "node --experimental-transform-types src/server.ts",
     "start_debug": "node --inspect-brk --experimental-transform-types src/server.ts",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "swagger": "ts-node-dev --respawn --transpile-only src/generate-swagger.ts"
+    "dev": "node --experimental-transform-types src/server.ts",
+    "swagger": "node --experimental-transform-types src/generate-swagger.ts"
   },
   "dependencies": {
     "body-parser": "^2.2.0",

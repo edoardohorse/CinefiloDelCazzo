@@ -2,6 +2,7 @@ import {Film} from "../../../../types";
 import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";
+import {useNavigate} from "react-router-dom";
 
 type TCardFilmProps = {
 	film: Film;
@@ -21,9 +22,13 @@ const CardDate = ({film}: TCardFilmProps) => {
 }
 
 const CardFilm = ({film}: TCardFilmProps) => {
+	const navigate  = useNavigate();
 
+	const onClickCard = ()=>{
+		navigate(`/film/${film.id}`);
+	}
 	return (
-		<Card type="ambient" key={film.id}>
+		<Card type="ambient" key={film.id} onClick={onClickCard}>
 			<Fragment>
 				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img

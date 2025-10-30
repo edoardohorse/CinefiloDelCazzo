@@ -1,5 +1,5 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {createFilm, fetchAllFilm, QUERY_FN_FETCH_FILM} from "@/api/api";
+import {createFilm, fetchAllFilm, fetchFilmById, QUERY_FN_FETCH_FILM, QUERY_FN_FETCH_FILM_BY_ID} from "@/api/api";
 import {Film, FilmType} from "../../../types/film";
 import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
@@ -18,6 +18,12 @@ export const useFilm = {
 			mutationFn: (film: CreateFilmFormData) => createFilm(film)
 		})
 	},
+	fetchFilmById: (id: string)=>{
+		return useQuery<Film>({
+			queryKey: [QUERY_FN_FETCH_FILM_BY_ID, id],
+			queryFn: () => fetchFilmById(id),
+		})
+	}
 }
 
 
