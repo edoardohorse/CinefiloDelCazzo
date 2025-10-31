@@ -5,36 +5,26 @@ import { FilmController } from './controllers/filmController';
 import swaggerOptions from './config/swagger';
 import bodyParser from 'body-parser';
 import multer from 'multer';
-
-
 // Configure multer
 const upload = multer();
-
-
 const app = express();
 const port = process.env.PORT || 3000;
-
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-
 // Middleware
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '20mb' }));
-
 // CORS middleware
 app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', '*');
-	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-	next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    next();
 });
-
 // Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 // Initialize controller
 const filmController = new FilmController();
-
 /**
  * @swagger
  * /api/films:
@@ -67,8 +57,7 @@ const filmController = new FilmController();
  *         $ref: '#/components/responses/ServerError'
  */
 // @ts-ignore
-app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.createFilm);
-
+app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
 /**
  * @swagger
  * /api/films:
@@ -88,7 +77,6 @@ app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmCon
  *         $ref: '#/components/responses/ServerError'
  */
 app.get('/api/films', filmController.getFilms);
-
 /**
  * @swagger
  * /api/films/{id}:
@@ -123,7 +111,6 @@ app.get('/api/films', filmController.getFilms);
  *         $ref: '#/components/responses/ServerError'
  */
 app.get('/api/films/:id', filmController.getFilmById);
-
 /**
  * @swagger
  * /api/films/{id}:
@@ -158,7 +145,6 @@ app.get('/api/films/:id', filmController.getFilmById);
  *         $ref: '#/components/responses/ServerError'
  */
 app.put('/api/films/:id', filmController.updateFilm);
-
 /**
  * @swagger
  * /api/films/{id}:
@@ -193,7 +179,6 @@ app.put('/api/films/:id', filmController.updateFilm);
  *         $ref: '#/components/responses/ServerError'
  */
 app.delete('/api/films/:id', filmController.deleteFilm);
-
 /**
  * @swagger
  * /health:
@@ -217,9 +202,8 @@ app.delete('/api/films/:id', filmController.deleteFilm);
  *                   example: 2023-01-01T00:00:00.000Z
  */
 app.get('/health', (req, res) => {
-	res.json({ status: 'OK', timestamp: new Date().toISOString() });
+    res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
-
 /**
  * @swagger
  * /api-docs:
@@ -228,25 +212,21 @@ app.get('/health', (req, res) => {
  *     description: Interactive API documentation
  *     tags: [Documentation]
  */
-
 // 404 handler
 app.use('*', (req, res) => {
-	res.status(404).json({ error: 'Route not found' });
+    res.status(404).json({ error: 'Route not found' });
 });
-
 // Error handler
-app.use((error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-	console.error('Unhandled error:', error);
-	res.status(500).json({ error: 'Internal server error' });
+app.use((error, req, res, next) => {
+    console.error('Unhandled error:', error);
+    res.status(500).json({ error: 'Internal server error' });
 });
-
 app.listen(port, () => {
-	console.log(`Server running on http://localhost:${port}`);
-	console.log(`Swagger documentation available at http://localhost:${port}/api-docs`);
+    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Swagger documentation available at http://localhost:${port}/api-docs`);
 });
-
 // Graceful shutdown
 process.on('SIGINT', () => {
-	console.log('\nShutting down server...');
-	process.exit(0);
+    console.log('\nShutting down server...');
+    process.exit(0);
 });

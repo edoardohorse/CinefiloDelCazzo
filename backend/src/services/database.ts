@@ -1,8 +1,8 @@
 import sqlite3 from 'sqlite3';
-import type { Film, FilmType } from '../../../types/film.ts';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import {Film, FilmType} from "@cinofilodelcazzo/types/film";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

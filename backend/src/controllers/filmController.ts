@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express';
-import { DatabaseService } from '../services/database.ts';
-import type {CreateFilmRequest, Film, UpdateFilmRequest} from '../../../types/film.ts';
+import { DatabaseService } from '../services/database';
+import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinofilodelcazzo/types/film";
+
 
 interface CreateFilmRequestWithFiles extends Request {
 	body: CreateFilmRequest;
@@ -18,6 +19,7 @@ export class FilmController {
 
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
+		// @ts-ignore
 		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
 
 		if(body == undefined) {

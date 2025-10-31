@@ -6,7 +6,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "node --experimental-transform-types src/server.ts",
+    "start": "node dist/server.js",
     "start_debug": "node --inspect-brk --experimental-transform-types src/server.ts",
     "dev": "node --experimental-transform-types src/server.ts",
     "swagger": "node --experimental-transform-types src/generate-swagger.ts"
@@ -17,7 +17,9 @@
     "multer": "^1.4.5-lts.1",
     "sqlite3": "^5.1.6",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "@cinofilodelcazzo/types": "../types"
+
   },
   "devDependencies": {
     "@types/express": "^4.17.17",

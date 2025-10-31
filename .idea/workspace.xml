@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add links and ChipLinks to film">
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add page per film by id">
+      <change afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/types/tsconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/services/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/types/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,15 +33,19 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="package.json" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/backend/package.json" />
+    <dismissed value="$PROJECT_DIR$/frontend/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -41,34 +55,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.Unnamed.executor": "Debug",
-    "Node.js.filmController.ts.executor": "Debug",
-    "Node.js.server.ts.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "24.2.0",
-    "javascript.nodejs.core.library.typings.version": "24.2.1",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/ciao/CinofiloDelCazzo",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "wsl://Ubuntu@/home/ciao/.nvm/versions/node/v24.2.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "npm.start.executor": "Run",
-    "npm.start_debug.executor": "Run",
-    "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu\\home\\ciao\\CinofiloDelCazzo\\backend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.Unnamed.executor&quot;: &quot;Debug&quot;,
+    &quot;Node.js.filmController.ts.executor&quot;: &quot;Debug&quot;,
+    &quot;Node.js.server.ts.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.2.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.2.1&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/ciao/CinofiloDelCazzo/frontend/src/pages/Cinema&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;wsl://Ubuntu@/home/ciao/.nvm/versions/node/v24.2.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.start.executor&quot;: &quot;Run&quot;,
+    &quot;npm.start_debug.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;\\\\wsl.localhost\\Ubuntu\\home\\ciao\\CinofiloDelCazzo\\backend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="\\wsl.localhost\Ubuntu\home\ciao\CinofiloDelCazzo\frontend\src\pages\Cinema" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\home\ciao\CinofiloDelCazzo\frontend\src\components\Film" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend\src" />
@@ -130,7 +147,8 @@
       <workItem from="1761579308949" duration="961000" />
       <workItem from="1761580553681" duration="17851000" />
       <workItem from="1761635965501" duration="79000" />
-      <workItem from="1761641892770" duration="21863000" />
+      <workItem from="1761641892770" duration="27660000" />
+      <workItem from="1761818248369" duration="10036000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -220,11 +238,32 @@
       <option name="project" value="LOCAL" />
       <updated>1761667875075</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Update swagger">
+      <option name="closed" value="true" />
+      <created>1761668685466</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1761668685466</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Add page per film by id">
+      <option name="closed" value="true" />
+      <created>1761823322046</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1761823322046</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/types/film.js" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Backend" />
@@ -235,6 +274,8 @@
     <MESSAGE value="Splitting components" />
     <MESSAGE value="Add snackbar for error" />
     <MESSAGE value="Add links and ChipLinks to film" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add links and ChipLinks to film" />
+    <MESSAGE value="Update swagger" />
+    <MESSAGE value="Add page per film by id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add page per film by id" />
   </component>
 </project>

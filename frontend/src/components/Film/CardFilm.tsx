@@ -28,7 +28,7 @@ const CardFilm = ({film}: TCardFilmProps) => {
 		navigate(`/film/${film.id}`);
 	}
 	return (
-		<Card type="ambient" key={film.id} onClick={onClickCard}>
+		<Card type="ambient" key={film.id} onClick={onClickCard} style={{ cursor: "pointer" }}>
 			<Fragment>
 				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img
