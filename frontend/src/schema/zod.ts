@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import {FilmType} from "../../../types/film";
+import {FilmType} from "@cinofilodelcazzo/types";
 
 // Base film schema with common fields
 const baseFilmSchema = z.object({

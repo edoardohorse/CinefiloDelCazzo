@@ -1,10 +1,11 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {createFilm, fetchAllFilm, fetchFilmById, QUERY_FN_FETCH_FILM, QUERY_FN_FETCH_FILM_BY_ID} from "@/api/api";
-import {Film, FilmType} from "../../../types/film";
+
 import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ChangeEvent, useEffect, useState} from "react";
+import {Film, FilmType} from "@cinofilodelcazzo/types";
 
 export const useFilm = {
 	fetchAll: ()=> {

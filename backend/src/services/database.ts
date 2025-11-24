@@ -1,49 +1,47 @@
 import sqlite3 from 'sqlite3';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import {Film, FilmType} from "@cinofilodelcazzo/types/film";
+import {Film, FilmType} from "@cinofilodelcazzo/types";
+import {Database, open} from "sqlite";
+import {log} from "../utils.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const DB_PATH = path.join(__dirname, '../../films.db');
 
 export class DatabaseService {
-	private db: sqlite3.Database;
+	private db: Database | undefined;
 
 	constructor() {
-		this.db = new sqlite3.Database(DB_PATH, (err) => {
-			if (err) {
-				console.error('Error opening database:', err.message);
-			} else {
-				console.log('Connected to SQLite database.');
-				this.init();
-			}
+		this.connect()
+	}
+
+	private async connect() {
+		this.db = await open({
+			filename: "database.sqlite",
+			driver: sqlite3.Database,
 		});
+
+		this.init()
 	}
 
 	private init(): void {
 		const createTableSQL = `
-			CREATE TABLE IF NOT EXISTS films (
-			 id INTEGER PRIMARY KEY AUTOINCREMENT,
-			 name TEXT NOT NULL,
-			 thumbnail BLOB NULL,
-			 releaseDate DATETIME NOT NULL,
-			 endDate DATETIME,
-			 type TEXT CHECK(type IN ('film', 'anime')) NOT NULL,
-			 description TEXT,
-			 links TEXT, -- Store JSON array of strings
-			 createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
-			 updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
-			)
+        CREATE TABLE IF NOT EXISTS films
+        (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            name        TEXT                                   NOT NULL,
+            thumbnail   BLOB                                   NULL,
+            releaseDate DATETIME                               NOT NULL,
+            endDate     DATETIME,
+            type        TEXT CHECK (type IN ('film', 'anime')) NOT NULL,
+            description TEXT,
+            links       TEXT, -- Store JSON array of strings
+            createdAt   DATETIME DEFAULT CURRENT_TIMESTAMP,
+            updatedAt   DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
 		`;
 
-		this.db.run(createTableSQL, (err) => {
-			if (err) {
-				console.error('Error creating table:', err.message);
-			} else {
-				console.log('Films table ready.');
-			}
+		this.db?.run(createTableSQL)
+			.then((err) => {
+				log.info('Films table ready.');
+			}).catch((err) => {
+				log.error(`Error creating table: ${err.message}`);
 		});
 	}
 
@@ -51,11 +49,11 @@ export class DatabaseService {
 	createFilm(film: Omit<Film, 'id'>): Promise<number> {
 		return new Promise((resolve, reject) => {
 			const sql = `
-				INSERT INTO films (name, thumbnail, releaseDate, endDate, type, description, links)
-				VALUES (?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO films (name, thumbnail, releaseDate, endDate, type, description, links)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
 			`;
 
-			this.db.run(
+			this.db?.run(
 				sql,
 				[
 					film.name,
@@ -65,15 +63,15 @@ export class DatabaseService {
 					film.type,
 					film.description,
 					JSON.stringify(film.links || []) // Store links as JSON string
-				],
-				function(err) {
-					if (err) {
-						reject(err);
-					} else {
-						resolve(this.lastID);
-					}
+				]).then((res) => {
+				if (res.lastID) {
+					resolve(res.lastID);
+					log.success(`Film CREATED: id:${res.lastID} | ${film.name}`)
 				}
-			);
+			}).catch((err) => {
+				reject(err);
+				log.error(`Error creating film: ${err.message}`);
+			})
 		});
 	}
 
@@ -82,11 +80,9 @@ export class DatabaseService {
 		return new Promise((resolve, reject) => {
 			const sql = 'SELECT * FROM films ORDER BY createdAt DESC';
 
-			this.db.all(sql, [], (err, rows: any[]) => {
-				if (err) {
-					reject(err);
-				} else {
-					const films: Film[] = rows.map(row => ({
+			this.db?.all(sql, [])
+				.then(res => {
+					const films: Film[] = res.map(row => ({
 						id: row.id,
 						name: row.name,
 						thumbnail: row.thumbnail,
@@ -97,9 +93,13 @@ export class DatabaseService {
 						links: row.links ? JSON.parse(row.links) : [] // Parse JSON back to array
 					}));
 					resolve(films);
-				}
-			});
-		});
+					log.success(`Films fetched: ${films.length}`)
+				})
+				.catch((err) =>{
+					reject(err)
+					log.error(`Error fetching films: ${err.message}`)
+				})
+		})
 	}
 
 	// Get film by ID
@@ -107,10 +107,8 @@ export class DatabaseService {
 		return new Promise((resolve, reject) => {
 			const sql = 'SELECT * FROM films WHERE id = ?';
 
-			this.db.get(sql, [id], (err, row: any) => {
-				if (err) {
-					reject(err);
-				} else if (!row) {
+			this.db?.get(sql, [id]).then((row: any) => {
+				if (!row) {
 					resolve(null);
 				} else {
 					const film: Film = {
@@ -124,7 +122,11 @@ export class DatabaseService {
 						links: row.links ? JSON.parse(row.links) : [] // Parse JSON back to array
 					};
 					resolve(film);
+					log.success(`Film fetched: id: ${film.id} | ${film.name}`)
 				}
+			}).catch((err) =>{
+				reject(err)
+				log.error(`Error fetching film: ${err.message}`)
 			});
 		});
 	}
@@ -167,16 +169,20 @@ export class DatabaseService {
 			fields.push('updatedAt = CURRENT_TIMESTAMP');
 			values.push(id);
 
-			const sql = `UPDATE films SET ${fields.join(', ')} WHERE id = ?`;
+			const sql = `UPDATE films
+                   SET ${fields.join(', ')}
+                   WHERE id = ?`;
 
-			this.db.run(sql, values, function(err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(this.changes > 0);
+			this.db?.run(sql, values).then(res => {
+				if (res.changes) {
+					resolve(res.changes > 0);
+					log.success(`Film updated: id: ${id} | ${film.name}`)
 				}
+			}).catch(err => {
+				reject(err)
+				log.error(`Error updating film: ${err.message}`)
 			});
-		});
+		})
 	}
 
 	// Delete film
@@ -184,23 +190,25 @@ export class DatabaseService {
 		return new Promise((resolve, reject) => {
 			const sql = 'DELETE FROM films WHERE id = ?';
 
-			this.db.run(sql, [id], function(err) {
-				if (err) {
-					reject(err);
-				} else {
-					resolve(this.changes > 0);
+			this.db?.run(sql, [id]).then((res) => {
+				if (res.changes) {
+					resolve(res.changes > 0);
+					log.success(`Film deleted: id: ${id}`)
 				}
+			}).catch(err =>{
+				reject(err)
+				log.error(`Error deleting film: ${err.message}`)
 			});
 		});
 	}
 
 	close(): void {
-		this.db.close((err) => {
+		this.db?.close().then(_ => {
+			log.info('Database connection closed.');
+		}).catch(err => {
 			if (err) {
-				console.error('Error closing database:', err.message);
-			} else {
-				console.log('Database connection closed.');
+				log.error(`Error closing database: ${err.message}`);
 			}
-		});
+		})
 	}
 }

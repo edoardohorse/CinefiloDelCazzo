@@ -1,10 +1,10 @@
 import express from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { FilmController } from './controllers/filmController';
-import swaggerOptions from './config/swagger';
 import bodyParser from 'body-parser';
 import multer from 'multer';
+import {FilmController} from "./controllers/filmController.js";
+import swaggerOptions from "./config/swagger.js";
 
 
 // Configure multer

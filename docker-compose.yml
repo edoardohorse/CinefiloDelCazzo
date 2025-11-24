@@ -1,0 +1,30 @@
+services:
+  node-app:
+    image: node:24.0.0-alpine
+    container_name: CinofiloDelCazzoBE
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - ./sqlite_data:/app/data
+#      - ./backend/films.db:/backend/app/films.db:rw
+#      - ./package.json:/app/package.json
+#      - ./node_modules:/app/node_modules
+#      - ./dist:/app/dist
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+#      - NODE_OPTIONS=--max-old-space-size=100
+    command: [ "node", "dist/server.js" ]
+
+    #    command: npm start
+#    command: npm start
+#    restart: unless-stopped
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 512M
+#          cpus: '0.5'
+#        reservations:
+#          memory: 256M
+#          cpus: '0.25'

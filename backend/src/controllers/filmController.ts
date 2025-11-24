@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
-import { DatabaseService } from '../services/database';
-import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinofilodelcazzo/types/film";
-
+import { DatabaseService } from '../services/database.js';
+import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinofilodelcazzo/types";
+import {log} from "../utils.js";
 
 interface CreateFilmRequestWithFiles extends Request {
 	body: CreateFilmRequest;
@@ -23,7 +23,7 @@ export class FilmController {
 		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
 
 		if(body == undefined) {
-			console.error('Error creating film: body is empty');
+			log.error('Error creating film: body is empty');
 			res.status(500).json({ error: 'Internal server error' });
 			return {res: false, data: null};
 		}
@@ -32,6 +32,7 @@ export class FilmController {
 			res.status(400).json({
 				error: 'Missing required fields: name'
 			});
+			log.error('Film CREATE: Missing required fields: name')
 			return {res: false, data: null};
 		}
 		if(body.name.trim() === ''){
@@ -45,6 +46,7 @@ export class FilmController {
 			res.status(400).json({
 				error: 'Missing required fields: thumbnail'
 			});
+			log.error('Film CREATE: Missing required fields: thumbnail')
 			return {res: false, data: null};
 		}
 
@@ -52,6 +54,7 @@ export class FilmController {
 			res.status(400).json({
 				error: 'Missing required fields: releaseDate'
 			});
+			log.error('Film CREATE: Missing required fields: releaseDate')
 			return {res: false, data: null};
 		}
 
@@ -59,6 +62,7 @@ export class FilmController {
 			res.status(400).json({
 				error: 'Missing required fields: type'
 			});
+			log.error('Film CREATE: Missing required fields: type')
 			return {res: false, data: null};
 		}
 
@@ -89,7 +93,7 @@ export class FilmController {
 			const id = await this.dbService.createFilm(film);
 			res.status(201).json({ id, message: 'Film created successfully' });
 		} catch (error) {
-			console.error('Error creating film:', error);
+			log.error(`Error creating film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
@@ -108,7 +112,7 @@ export class FilmController {
 
 			res.json(filmsWithBase64);
 		} catch (error) {
-			console.error('Error fetching films:', error);
+			log.error(`Error fetching films: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
@@ -139,7 +143,7 @@ export class FilmController {
 
 			res.json(filmWithBase64);
 		} catch (error) {
-			console.error('Error fetching film:', error);
+			log.error(`Error fetching film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
@@ -183,7 +187,7 @@ export class FilmController {
 
 			res.json({ message: 'Film updated successfully' });
 		} catch (error) {
-			console.error('Error updating film:', error);
+			log.error(`Error updating film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
@@ -207,7 +211,7 @@ export class FilmController {
 
 			res.json({ message: 'Film deleted successfully' });
 		} catch (error) {
-			console.error('Error deleting film:', error);
+			log.error(`Error deleting film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
