@@ -1,9 +1,15 @@
 {
-  "name": "reactjs-template",
+  "name": "@cinefilodelcazzo/frontend",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.1",
-  "type": "module",
+  "description": "Frontend",
+  "keywords": [
+    "frontend"
+  ],
   "homepage": "https://telegram-mini-apps.github.io/reactjs-template",
+  "license": "ISC",
+  "author": "Edoardo Cavallo",
+  "type": "module",
   "scripts": {
     "deploy": "gh-pages -d dist",
     "dev": "vite --host",
@@ -15,9 +21,11 @@
     "predeploy": "npm run build"
   },
   "dependencies": {
+    "@cinefilodelcazzo/types": "../types",
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.5",
     "@telegram-apps/telegram-ui": "^2.1.9",
+    "@tma.js/sdk": "^3.1.2",
     "@tma.js/sdk-react": "^3.0.7",
     "@tonconnect/ui-react": "^2.2.0",
     "@uidotdev/usehooks": "^2.4.1",
@@ -27,8 +35,7 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.65.0",
     "react-router-dom": "^6.30.1",
-    "zod": "^4.1.12",
-    "@cinefilodelcazzo/types": "../types"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",

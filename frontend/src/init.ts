@@ -5,11 +5,10 @@ import {
   viewport,
   init as initSDK,
   mockTelegramEnv,
-  type ThemeParams,
   retrieveLaunchParams,
   emitEvent,
   miniApp,
-  backButton,
+  backButton
 } from '@tma.js/sdk-react';
 
 /**
@@ -24,7 +23,7 @@ export async function init(options: {
   setDebug(options.debug);
   initSDK();
 
-  // Add Eruda if needed.
+	// Add Eruda if needed.
   options.eruda && void import('eruda').then(({ default: eruda }) => {
     eruda.init();
     eruda.position({ x: window.innerWidth - 50, y: 0 });
@@ -38,14 +37,13 @@ export async function init(options: {
     mockTelegramEnv({
       onEvent(event, next) {
         if (event.name === 'web_app_request_theme') {
-          let tp: ThemeParams = {};
           if (firstThemeSent) {
-            tp = themeParams.state();
+	          return emitEvent('theme_changed', { theme_params:themeParams.state() });
           } else {
             firstThemeSent = true;
-            tp ||= retrieveLaunchParams().tgWebAppThemeParams;
+	          return emitEvent('theme_changed', { theme_params:retrieveLaunchParams().tgWebAppThemeParams });
           }
-          return emitEvent('theme_changed', { theme_params: tp });
+
         }
 
         if (event.name === 'web_app_request_safe_area') {
