@@ -27,13 +27,14 @@ export default defineConfig({
   ],
   build: {
     target: 'esnext',
-    minify: 'terser'
+    minify: 'terser',
+	  outDir: 'dist',
+	  sourcemap: false
   },
   publicDir: './public',
   server: {
     // Exposes your dev server and makes it accessible for the devices in the same network.
-    host: true,
-
-	  allowedHosts:["sweet-bananas-kick.loca.lt"],
+	  port: process.env.PORT || 10000,
+	  host: '0.0.0.0' // Important for Render
   },
 });
