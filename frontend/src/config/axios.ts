@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PORT = '3000'
+const PORT = '10000'
 const BASE_URL = `http://localhost:${PORT}/api`;
 
 
