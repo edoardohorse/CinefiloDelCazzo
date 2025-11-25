@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ChangeEvent, useEffect, useState} from "react";
-import {Film, FilmType} from "@cinofilodelcazzo/types";
+import {Film, FilmType} from "@cinefilodelcazzo/types";
 
 export const useFilm = {
 	fetchAll: ()=> {

@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { DatabaseService } from '../services/database.js';
-import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinofilodelcazzo/types";
+import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 import {log} from "../utils.js";
 
 interface CreateFilmRequestWithFiles extends Request {

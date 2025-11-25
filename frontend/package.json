@@ -28,7 +28,7 @@
     "react-hook-form": "^7.65.0",
     "react-router-dom": "^6.30.1",
     "zod": "^4.1.12",
-    "@cinofilodelcazzo/types": "../types"
+    "@cinefilodelcazzo/types": "../types"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",

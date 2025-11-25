@@ -1,5 +1,5 @@
 import sqlite3 from 'sqlite3';
-import {Film, FilmType} from "@cinofilodelcazzo/types";
+import {Film, FilmType} from "@cinefilodelcazzo/types";
 import {Database, open} from "sqlite";
 import {log} from "../utils.js";
 

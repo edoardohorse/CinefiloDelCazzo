@@ -3,7 +3,7 @@ version: '3.8'
 services:
   node-app:
     image: node:20-alpine
-    container_name: CinofiloDelCazzoBE
+    container_name: CinefiloDelCazzoBE
     working_dir: ./
     volumes:
       - ./node_modules
