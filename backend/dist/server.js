@@ -1,14 +1,16 @@
 import express from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { FilmController } from './controllers/filmController';
-import swaggerOptions from './config/swagger';
 import bodyParser from 'body-parser';
 import multer from 'multer';
+import { FilmController } from "./controllers/filmController.js";
+import swaggerOptions from "./config/swagger.js";
+import path from 'path';
+import { log } from "./utils.js";
 // Configure multer
 const upload = multer();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 10000;
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 // Middleware
@@ -25,39 +27,15 @@ app.use((req, res, next) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Initialize controller
 const filmController = new FilmController();
-/**
- * @swagger
- * /api/films:
- *   post:
- *     summary: Create a new film
- *     tags: [Films]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/CreateFilmRequest'
- *     responses:
- *       201:
- *         description: Film created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *                   description: ID of the created film
- *                 message:
- *                   type: string
- *                   example: Film created successfully
- *       400:
- *         $ref: '#/components/responses/ValidationError'
- *       500:
- *         $ref: '#/components/responses/ServerError'
- */
-// @ts-ignore
-app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
+// Serve static files from Vite build
+import { fileURLToPath } from 'url';
+// ES modules __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dirnameSplit = __dirname.split('/');
+const dirname = dirnameSplit.slice(0, dirnameSplit.length - 2).join('/');
+const dirFrontend = `${dirname}/frontend`;
+app.use(express.static(path.join(dirFrontend, 'dist')));
 /**
  * @swagger
  * /api/films:
@@ -113,6 +91,39 @@ app.get('/api/films', filmController.getFilms);
 app.get('/api/films/:id', filmController.getFilmById);
 /**
  * @swagger
+ * /api/films:
+ *   post:
+ *     summary: Create a new film
+ *     tags: [Films]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateFilmRequest'
+ *     responses:
+ *       201:
+ *         description: Film created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: ID of the created film
+ *                 message:
+ *                   type: string
+ *                   example: Film created successfully
+ *       400:
+ *         $ref: '#/components/responses/ValidationError'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
+// @ts-ignore
+app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
+/**
+ * @swagger
  * /api/films/{id}:
  *   put:
  *     summary: Update a film
@@ -144,7 +155,8 @@ app.get('/api/films/:id', filmController.getFilmById);
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.put('/api/films/:id', filmController.updateFilm);
+// @ts-ignore
+app.put('/api/films/:id', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.updateFilm);
 /**
  * @swagger
  * /api/films/{id}:
@@ -202,7 +214,9 @@ app.delete('/api/films/:id', filmController.deleteFilm);
  *                   example: 2023-01-01T00:00:00.000Z
  */
 app.get('/health', (req, res) => {
-    res.json({ status: 'OK', timestamp: new Date().toISOString() });
+    const result = { status: 'OK', timestamp: new Date().toISOString() };
+    res.json(result);
+    log.success(`Status: ${result.status} - ${result.timestamp}`);
 });
 /**
  * @swagger
@@ -212,9 +226,9 @@ app.get('/health', (req, res) => {
  *     description: Interactive API documentation
  *     tags: [Documentation]
  */
-// 404 handler
-app.use('*', (req, res) => {
-    res.status(404).json({ error: 'Route not found' });
+// Fallback to index.html for SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(dirFrontend, 'dist', 'index.html'));
 });
 // Error handler
 app.use((error, req, res, next) => {

@@ -10,6 +10,10 @@ type TCardFilmProps = {
 
 const CardDate = ({film}: TCardFilmProps) => {
 
+	if(film?.releaseDate == undefined){
+		return null;
+	}
+
 	if (film.endDate) {
 		return (
 			<p>{dateFormatted(film.releaseDate)} - {dateFormatted(film.releaseDate)}</p>
@@ -25,10 +29,11 @@ const CardFilm = ({film}: TCardFilmProps) => {
 	const navigate  = useNavigate();
 
 	const onClickCard = ()=>{
-		navigate(`/film/${film.id}`);
+		navigate(`/list/${film.id}`);
+		// showViewFilm(film.id)
 	}
 	return (
-		<Card type="ambient" key={film.id} onClick={onClickCard} style={{ cursor: "pointer" }}>
+		<Card type="ambient" key={film.id} className={'card-film'} onClick={onClickCard} style={{ cursor: "pointer", minWidth:"30vw" }}>
 			<Fragment>
 				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img

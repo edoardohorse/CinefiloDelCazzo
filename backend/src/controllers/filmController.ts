@@ -1,10 +1,21 @@
 import type { Request, Response } from 'express';
 import { DatabaseService } from '../services/database.js';
-import {CreateFilmRequest, Film, UpdateFilmRequest} from "@cinefilodelcazzo/types";
+import {CreateFilmRequest, Film, IResult, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 import {log} from "../utils.js";
+
+const SUCCESS_CREATE_FILM = 'Film created successfully'
+const SUCCESS_UPDATE_FILM = 'Film updated successfully'
+const SUCCESS_DELETE_FILM = 'Film deleted successfully'
 
 interface CreateFilmRequestWithFiles extends Request {
 	body: CreateFilmRequest;
+	files: {
+		thumbnail: Express.Multer.File[];
+	};
+}
+
+interface UpdateFilmRequestWithFiles extends Request {
+	body: UpdateFilmRequest;
 	files: {
 		thumbnail: Express.Multer.File[];
 	};
@@ -20,7 +31,7 @@ export class FilmController {
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
 		// @ts-ignore
-		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+		let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null
 
 		if(body == undefined) {
 			log.error('Error creating film: body is empty');
@@ -42,21 +53,6 @@ export class FilmController {
 			return {res: false, data: null};
 		}
 
-		if(bufferThumbnail == null ) {
-			res.status(400).json({
-				error: 'Missing required fields: thumbnail'
-			});
-			log.error('Film CREATE: Missing required fields: thumbnail')
-			return {res: false, data: null};
-		}
-
-		if(body.releaseDate === undefined) {
-			res.status(400).json({
-				error: 'Missing required fields: releaseDate'
-			});
-			log.error('Film CREATE: Missing required fields: releaseDate')
-			return {res: false, data: null};
-		}
 
 		if(body.type === undefined) {
 			res.status(400).json({
@@ -70,14 +66,44 @@ export class FilmController {
 		const filmData: CreateFilmRequest = req.body;
 		const film = {
 			name: filmData.name,
-			thumbnail: bufferThumbnail,
-			releaseDate: new Date(filmData.releaseDate),
+			thumbnail: bufferThumbnail?.toString('base64') || null,
+			releaseDate: filmData.releaseDate? new Date(filmData.releaseDate): null,
 			endDate: filmData.endDate ? new Date(filmData.endDate) : null,
 			type: filmData.type,
 			description: filmData.description || null,
 			links: filmData.links || []
 		};
 
+		// @ts-ignore
+		return {res: true, data: film}
+	}
+
+	validateEditFilmRequest(req: UpdateFilmRequestWithFiles, res: Response):  {res: boolean, data: Film | null}  {
+		const {body: film, files} = req;
+
+		let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null
+
+		// @ts-ignore
+		// let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+
+		delete film.id
+
+		if(film.releaseDate == ""){
+			film.releaseDate = null
+		}
+
+		if(film.endDate == ""){
+			film.endDate = null
+		}
+
+		if(Object.keys(req.files).length == 0){
+			film.thumbnail = undefined;
+		}
+		else{
+			film.thumbnail = bufferThumbnail?.toString('base64')
+		}
+
+		// @ts-ignore
 		return {res: true, data: film}
 	}
 
@@ -90,8 +116,9 @@ export class FilmController {
 				return
 			}
 
-			const id = await this.dbService.createFilm(film);
-			res.status(201).json({ id, message: 'Film created successfully' });
+			const result = await this.dbService.createFilm(film);
+
+			res.status(201).json({ result: result, message: SUCCESS_CREATE_FILM } as IResult<Film>);
 		} catch (error) {
 			log.error(`Error creating film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
@@ -107,7 +134,7 @@ export class FilmController {
 			const filmsWithBase64 = films.map(film => ({
 				...film,
 				// @ts-ignore
-				thumbnail: `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}`
+				thumbnail: film?.thumbnail ? `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}` : null
 			}));
 
 			res.json(filmsWithBase64);
@@ -149,7 +176,7 @@ export class FilmController {
 	};
 
 	// Update film
-	updateFilm = async (req: Request, res: Response): Promise<void> => {
+	updateFilm = async (req: UpdateFilmRequestWithFiles, res: Response): Promise<void> => {
 		try {
 			const id = parseInt(req.params.id);
 
@@ -158,34 +185,19 @@ export class FilmController {
 				return;
 			}
 
-			const updateData: UpdateFilmRequest = req.body;
+			const {res: resValidate, data:film}  = this.validateEditFilmRequest(req, res);
 
-			// Validate type if provided
-			if (updateData.type && !['film', 'anime'].includes(updateData.type)) {
-				res.status(400).json({
-					error: 'Type must be either "film" or "anime"'
-				});
-				return;
+			let updated = null
+			if(film != null){
+				updated = await this.dbService.updateFilm(id, film);
 			}
-
-			const filmUpdate: any = {};
-
-			if (updateData.name !== undefined) filmUpdate.name = updateData.name;
-			if (updateData.thumbnail !== undefined) filmUpdate.thumbnail = updateData.thumbnail;
-			if (updateData.releaseDate !== undefined) filmUpdate.releaseDate = new Date(updateData.releaseDate);
-			if (updateData.endDate !== undefined) filmUpdate.endDate = updateData.endDate ? new Date(updateData.endDate) : null;
-			if (updateData.type !== undefined) filmUpdate.type = updateData.type;
-			if (updateData.description !== undefined) filmUpdate.description = updateData.description;
-			if (updateData.links !== undefined) filmUpdate.description = updateData.links;
-
-			const updated = await this.dbService.updateFilm(id, filmUpdate);
 
 			if (!updated) {
 				res.status(404).json({ error: 'Film not found' });
 				return;
 			}
 
-			res.json({ message: 'Film updated successfully' });
+			res.status(200).json({ result: updated, message: SUCCESS_UPDATE_FILM} as IResult<Film>);
 		} catch (error) {
 			log.error(`Error updating film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
@@ -209,7 +221,7 @@ export class FilmController {
 				return;
 			}
 
-			res.json({ message: 'Film deleted successfully' });
+			res.status(200).json({ result: deleted, message: SUCCESS_DELETE_FILM } as IResult<Film>);
 		} catch (error) {
 			log.error(`Error deleting film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });

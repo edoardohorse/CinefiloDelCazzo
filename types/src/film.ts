@@ -6,18 +6,19 @@ export enum FilmType{
 export interface Film {
 	id?: number;
 	name: string;
-	thumbnail?: Blob | string;
-	releaseDate: Date;
-	endDate: Date | null;
+	thumbnail?: string ;
+	releaseDate?: string | null;
+	endDate?: string | null;
 	type: FilmType;
 	description: string | null;
 	links?: Array<string>;
+	seen? : boolean;
 }
 
 export interface CreateFilmRequest {
 	name: string;
-	thumbnail: Blob;
-	releaseDate: string;
+	thumbnail?: string;
+	releaseDate?: string | null;
 	endDate?: string | null;
 	type: FilmType;
 	description?: string | null;
@@ -26,11 +27,18 @@ export interface CreateFilmRequest {
 
 
 export interface UpdateFilmRequest {
+	id?: number;
 	name?: string;
-	thumbnail?: Blob;
-	releaseDate?: string;
+	thumbnail?: string;
+	releaseDate?: string | null;
 	endDate?: string | null;
 	type?: FilmType;
 	description?: string | null;
 	links?: Array<string>;
+}
+
+export interface IResult<T>{
+	result: T
+	message:string;
+	error?:string;
 }
