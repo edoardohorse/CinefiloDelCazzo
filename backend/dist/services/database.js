@@ -1,7 +1,5 @@
 import { libPrisma } from "../lib/libPrisma.js";
 export class DatabaseService {
-    constructor() {
-    }
     // Create a new film
     createFilm(film) {
         // log.info(`Trying ${JSON.stringify(film)}`);

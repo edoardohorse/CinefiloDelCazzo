@@ -68,8 +68,8 @@ export class FilmController {
             if (!resValidate || film == null) {
                 return;
             }
-            const id = await this.dbService.createFilm(film);
-            res.status(201).json({ id, message: 'Film created successfully' });
+            const result = await this.dbService.createFilm(film);
+            res.status(201).json({ result, message: 'Film created successfully' });
         }
         catch (error) {
             log.error(`Error creating film: ${error}`);

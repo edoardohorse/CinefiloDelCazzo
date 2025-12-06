@@ -18,7 +18,7 @@ export const createFilmSchema = baseFilmSchema.extend({
 		.refine((file) =>
 				['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
 			'Only .jpg, .png, and .webp formats are supported'
-		),
+		).optional(),
 });
 
 // Update film schema (all fields optional)

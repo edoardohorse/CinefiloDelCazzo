@@ -4,24 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add links and ChipLinks to film">
-      <change afterPath="$PROJECT_DIR$/backend/.env.default" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/lib/libPrisma.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/prisma-index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Get films and createFilm works with Neon (prism)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dist/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/dist/services/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/services/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/services/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/dist/film.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/dist/film.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/src/film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/src/film.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/schema/zod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/schema/zod.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +65,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Node.js.Unnamed.executor": "Debug",
     "Node.js.filmController.ts.executor": "Debug",
+    "Node.js.server.js.executor": "Run",
     "Node.js.server.ts.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -89,6 +82,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
+    "npm.frontend > dev.executor": "Run",
     "npm.start.executor": "Debug",
     "npm.start_debug.executor": "Debug",
     "settings.editor.selected.configurable": "settings.nodejs",
@@ -110,6 +104,16 @@
   </component>
   <component name="RunManager" selected="Node.js.server.js">
     <configuration name="server.js" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--experimental-transform-types" path-to-js-file="dist/server.js" working-dir="$PROJECT_DIR$/backend">
+      <method v="2" />
+    </configuration>
+    <configuration name="frontend &gt; dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -134,11 +138,13 @@
     </configuration>
     <list>
       <item itemvalue="Node.js.server.js" />
+      <item itemvalue="npm.frontend &gt; dev" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.start_debug" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.frontend &gt; dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.start_debug" />
       </list>
@@ -251,7 +257,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761667875075</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Get films and createFilm works with Neon (prism)">
+      <option name="closed" value="true" />
+      <created>1765015688518</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1765015688518</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,7 +280,8 @@
     <MESSAGE value="Splitting components" />
     <MESSAGE value="Add snackbar for error" />
     <MESSAGE value="Add links and ChipLinks to film" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add links and ChipLinks to film" />
+    <MESSAGE value="Get films and createFilm works with Neon (prism)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Get films and createFilm works with Neon (prism)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -276,18 +291,6 @@
           <line>20</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/src/controllers/filmController.ts</url>
-          <line>87</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/backend/src/server.ts</url>
-          <line>258</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

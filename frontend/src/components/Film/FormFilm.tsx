@@ -57,7 +57,7 @@ const FormFilm = () => {
 
                 {/*File*/}
                 <div style={{display: "flex", alignItems: "center"}}>
-                    <FileInput label={"Thumbnail *"} onChange={onUpload} className={"test"}/>
+                    <FileInput label={"Thumbnail"} onChange={onUpload} className={"test"}/>
                     {errors.thumbnail && (
                         <Text style={{color: "red"}}>{errors.thumbnail.message}</Text>
                     )}

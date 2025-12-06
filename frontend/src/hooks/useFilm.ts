@@ -46,13 +46,14 @@ export const useFormFilm = () => {
 	const {mutateAsync, isSuccess, isPending} = useFilm.createFilm()
 
 	const handleCreateFilm = async (data: CreateFilmFormData) => {
-		// Convert File to Buffer if needed for your API
-		const thumbnailBuffer = await data.thumbnail.arrayBuffer();
-
 		const createFilmRequest = {
 			...data,
-			thumbnail: thumbnailBuffer,
 		};
+		if(data.thumbnail){
+			// Convert File to Buffer if needed for your API
+			createFilmRequest.thumbnail = await data.thumbnail.arrayBuffer();
+		}
+
 
 		console.log('Creating film:', createFilmRequest);
 		// Call your API here
