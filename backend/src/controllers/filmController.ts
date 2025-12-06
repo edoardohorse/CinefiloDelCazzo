@@ -20,7 +20,7 @@ export class FilmController {
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
 		// @ts-ignore
-		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+		// let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
 
 		if(body == undefined) {
 			log.error('Error creating film: body is empty');
@@ -42,13 +42,13 @@ export class FilmController {
 			return {res: false, data: null};
 		}
 
-		if(bufferThumbnail == null ) {
+/*		if(bufferThumbnail == null ) {
 			res.status(400).json({
 				error: 'Missing required fields: thumbnail'
 			});
 			log.error('Film CREATE: Missing required fields: thumbnail')
 			return {res: false, data: null};
-		}
+		}*/
 
 		if(body.releaseDate === undefined) {
 			res.status(400).json({
@@ -70,7 +70,7 @@ export class FilmController {
 		const filmData: CreateFilmRequest = req.body;
 		const film = {
 			name: filmData.name,
-			thumbnail: bufferThumbnail,
+			// thumbnail: bufferThumbnail,
 			releaseDate: new Date(filmData.releaseDate),
 			endDate: filmData.endDate ? new Date(filmData.endDate) : null,
 			type: filmData.type,
@@ -149,7 +149,7 @@ export class FilmController {
 	};
 
 	// Update film
-	updateFilm = async (req: Request, res: Response): Promise<void> => {
+/*	updateFilm = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const id = parseInt(req.params.id);
 
@@ -214,5 +214,5 @@ export class FilmController {
 			log.error(`Error deleting film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
-	};
+	};*/
 }

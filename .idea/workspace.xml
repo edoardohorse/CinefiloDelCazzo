@@ -4,18 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add page per film by id">
-      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Add links and ChipLinks to film">
+      <change afterPath="$PROJECT_DIR$/backend/.env.default" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/lib/libPrisma.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/prisma-index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/services/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/services/database.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/services/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/schema/zod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/schema/zod.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/types/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/types/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/dist/film.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/dist/film.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/types/src/film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/src/film.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,24 +37,27 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="tsconfig.json" />
         <option value="package.json" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
-        <option value="tsconfig.json" />
       </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="false" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="dev/docker" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/backend/package.json" />
-    <dismissed value="$PROJECT_DIR$/frontend/package.json" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -60,45 +69,47 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Node.js.Unnamed.executor": "Debug",
     "Node.js.filmController.ts.executor": "Debug",
     "Node.js.server.ts.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "dev/docker",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev/refactor-be",
     "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "24.2.0",
-    "javascript.nodejs.core.library.typings.version": "24.2.1",
+    "javascript.nodejs.core.library.configured.version": "24.3.0",
+    "javascript.nodejs.core.library.typings.version": "24.3.3",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/ciao/CinofiloDelCazzo/frontend/src/pages/Cinema",
+    "last_opened_file_path": "/home/ubuntu/Documents/CinefiloDelCazzo/backend",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "wsl://Ubuntu@/home/ciao/.nvm/versions/node/v24.2.0/bin/node",
+    "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
-    "npm.start.executor": "Run",
-    "npm.start_debug.executor": "Run",
+    "npm.start.executor": "Debug",
+    "npm.start_debug.executor": "Debug",
     "settings.editor.selected.configurable": "settings.nodejs",
-    "ts.external.directory.path": "\\\\wsl.localhost\\Ubuntu\\home\\ciao\\CinofiloDelCazzo\\backend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/home/ubuntu/Documents/CinefiloDelCazzo/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="\\wsl.localhost\Ubuntu\home\ciao\CinofiloDelCazzo\frontend\src\pages\Cinema" />
+      <recent name="$PROJECT_DIR$/backend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend/src" />
+      <recent name="$PROJECT_DIR$/backend" />
+      <recent name="$PROJECT_DIR$/backend/src/lib" />
       <recent name="\\wsl.localhost\Ubuntu\home\ciao\CinofiloDelCazzo\frontend\src\components\Film" />
       <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend\src" />
-      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\types" />
-      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\frontend" />
-      <recent name="C:\Users\netwo\Documenti\CinofiloDelCazzo\public" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
-    <configuration name="server.ts" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--experimental-transform-types" path-to-js-file="src/server.ts" working-dir="$PROJECT_DIR$/backend">
+  <component name="RunManager" selected="Node.js.server.js">
+    <configuration name="server.js" type="NodeJSConfigurationType" nameIsGenerated="true" node-parameters="--experimental-transform-types" path-to-js-file="dist/server.js" working-dir="$PROJECT_DIR$/backend">
       <method v="2" />
     </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -122,24 +133,21 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Node.js.server.ts" />
+      <item itemvalue="Node.js.server.js" />
       <item itemvalue="npm.start" />
       <item itemvalue="npm.start_debug" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start_debug" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.start_debug" />
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-WS-252.28238.10" />
       </set>
     </attachedChunks>
   </component>
@@ -153,8 +161,7 @@
       <workItem from="1761579308949" duration="961000" />
       <workItem from="1761580553681" duration="17851000" />
       <workItem from="1761635965501" duration="79000" />
-      <workItem from="1761641892770" duration="27660000" />
-      <workItem from="1761818248369" duration="10036000" />
+      <workItem from="1761641892770" duration="21863000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -244,32 +251,11 @@
       <option name="project" value="LOCAL" />
       <updated>1761667875075</updated>
     </task>
-    <task id="LOCAL-00012" summary="Update swagger">
-      <option name="closed" value="true" />
-      <created>1761668685466</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1761668685466</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Add page per film by id">
-      <option name="closed" value="true" />
-      <created>1761823322046</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1761823322046</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/types/film.js" />
-      </list>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Backend" />
@@ -280,8 +266,30 @@
     <MESSAGE value="Splitting components" />
     <MESSAGE value="Add snackbar for error" />
     <MESSAGE value="Add links and ChipLinks to film" />
-    <MESSAGE value="Update swagger" />
-    <MESSAGE value="Add page per film by id" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add page per film by id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add links and ChipLinks to film" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/src/controllers/filmController.ts</url>
+          <line>20</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/src/controllers/filmController.ts</url>
+          <line>87</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/src/server.ts</url>
+          <line>258</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

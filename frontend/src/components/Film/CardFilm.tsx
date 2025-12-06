@@ -10,6 +10,10 @@ type TCardFilmProps = {
 
 const CardDate = ({film}: TCardFilmProps) => {
 
+	if(film?.releaseDate == undefined){
+		return null;
+	}
+
 	if (film.endDate) {
 		return (
 			<p>{dateFormatted(film.releaseDate)} - {dateFormatted(film.releaseDate)}</p>

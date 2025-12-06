@@ -1,14 +1,15 @@
 import express from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { FilmController } from './controllers/filmController';
-import swaggerOptions from './config/swagger';
 import bodyParser from 'body-parser';
 import multer from 'multer';
+import { FilmController } from "./controllers/filmController.js";
+import swaggerOptions from "./config/swagger.js";
+import path from 'path';
 // Configure multer
 const upload = multer();
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 10000;
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 // Middleware
@@ -25,6 +26,15 @@ app.use((req, res, next) => {
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Initialize controller
 const filmController = new FilmController();
+// Serve static files from Vite build
+import { fileURLToPath } from 'url';
+// ES modules __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const dirnameSplit = __dirname.split('/');
+const dirname = dirnameSplit.slice(0, dirnameSplit.length - 2).join('/');
+const dirFrontend = `${dirname}/frontend`;
+app.use(express.static(path.join(dirFrontend, 'dist')));
 /**
  * @swagger
  * /api/films:
@@ -144,8 +154,9 @@ app.get('/api/films/:id', filmController.getFilmById);
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.put('/api/films/:id', filmController.updateFilm);
-/**
+/*app.put('/api/films/:id', filmController.updateFilm);
+
+/!**
  * @swagger
  * /api/films/{id}:
  *   delete:
@@ -177,8 +188,8 @@ app.put('/api/films/:id', filmController.updateFilm);
  *         $ref: '#/components/responses/NotFound'
  *       500:
  *         $ref: '#/components/responses/ServerError'
- */
-app.delete('/api/films/:id', filmController.deleteFilm);
+ *!/
+app.delete('/api/films/:id', filmController.deleteFilm);*/
 /**
  * @swagger
  * /health:
@@ -212,9 +223,9 @@ app.get('/health', (req, res) => {
  *     description: Interactive API documentation
  *     tags: [Documentation]
  */
-// 404 handler
-app.use('*', (req, res) => {
-    res.status(404).json({ error: 'Route not found' });
+// Fallback to index.html for SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(dirFrontend, 'dist', 'index.html'));
 });
 // Error handler
 app.use((error, req, res, next) => {

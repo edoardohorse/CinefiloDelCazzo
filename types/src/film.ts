@@ -6,12 +6,13 @@ export enum FilmType{
 export interface Film {
 	id?: number;
 	name: string;
-	thumbnail?: Blob | string;
-	releaseDate: Date;
-	endDate: Date | null;
+	thumbnail?: string ;
+	releaseDate?: Date;
+	endDate?: Date | null;
 	type: FilmType;
 	description: string | null;
 	links?: Array<string>;
+	seen? : boolean;
 }
 
 export interface CreateFilmRequest {

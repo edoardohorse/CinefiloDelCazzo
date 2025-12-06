@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="WS-251.26094.131">
+  <component name="dataSourceStorageLocal" created-in="WS-252.28238.10">
     <data-source name="films" uuid="1900df3d-b88d-482a-aadb-3b46cc0ebcf4">
       <database-info product="SQLite" version="3.45.1" jdbc-version="4.2" driver-name="SQLite JDBC" driver-version="3.45.1.0" dbms="SQLITE" exact-version="3.45.1" exact-driver-version="3.45">
         <identifier-quote-string>&quot;</identifier-quote-string>
@@ -12,6 +12,29 @@
           <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
+    </data-source>
+    <data-source name="Neon" uuid="570c0024-a36b-4b94-b629-67716197826d">
+      <database-info product="PostgreSQL" version="17.7 (178558d)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.7.3" dbms="POSTGRES" exact-version="17.7" exact-driver-version="42.7">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <auth-provider>no-auth</auth-provider>
+      <user-name>neondb_owner</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node negative="1">
+            <node kind="database" qname="@" />
+            <node kind="database" qname="neondb">
+              <node kind="schema" qname="public" />
+            </node>
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <ssl-config use-ide-store="true" use-java-store="true" use-system-store="true">
+        <ca-cert>/etc/ssl/certs/ca-certificates.crt</ca-cert>
+        <enabled>false</enabled>
+        <mode>REQUIRE</mode>
+      </ssl-config>
     </data-source>
   </component>
 </project>
