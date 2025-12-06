@@ -119,4 +119,68 @@ export class FilmController {
             res.status(500).json({ error: 'Internal server error' });
         }
     };
+    // Update film
+    /*	updateFilm = async (req: Request, res: Response): Promise<void> => {
+            try {
+                const id = parseInt(req.params.id);
+    
+                if (isNaN(id)) {
+                    res.status(400).json({ error: 'Invalid film ID' });
+                    return;
+                }
+    
+                const updateData: UpdateFilmRequest = req.body;
+    
+                // Validate type if provided
+                if (updateData.type && !['film', 'anime'].includes(updateData.type)) {
+                    res.status(400).json({
+                        error: 'Type must be either "film" or "anime"'
+                    });
+                    return;
+                }
+    
+                const filmUpdate: any = {};
+    
+                if (updateData.name !== undefined) filmUpdate.name = updateData.name;
+                if (updateData.thumbnail !== undefined) filmUpdate.thumbnail = updateData.thumbnail;
+                if (updateData.releaseDate !== undefined) filmUpdate.releaseDate = new Date(updateData.releaseDate);
+                if (updateData.endDate !== undefined) filmUpdate.endDate = updateData.endDate ? new Date(updateData.endDate) : null;
+                if (updateData.type !== undefined) filmUpdate.type = updateData.type;
+                if (updateData.description !== undefined) filmUpdate.description = updateData.description;
+                if (updateData.links !== undefined) filmUpdate.description = updateData.links;
+    
+                const updated = await this.dbService.updateFilm(id, filmUpdate);
+    
+                if (!updated) {
+                    res.status(404).json({ error: 'Film not found' });
+                    return;
+                }
+    
+                res.json({ message: 'Film updated successfully' });
+            } catch (error) {
+                log.error(`Error updating film: ${error}`);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        };
+    */
+    // Delete film
+    deleteFilm = async (req, res) => {
+        try {
+            const id = parseInt(req.params.id);
+            if (isNaN(id)) {
+                res.status(400).json({ error: 'Invalid film ID' });
+                return;
+            }
+            const deleted = await this.dbService.deleteFilm(id);
+            if (!deleted) {
+                res.status(404).json({ error: 'Film not found' });
+                return;
+            }
+            res.json({ message: 'Film deleted successfully' });
+        }
+        catch (error) {
+            log.error(`Error deleting film: ${error}`);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    };
 }

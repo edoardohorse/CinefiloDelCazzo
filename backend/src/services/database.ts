@@ -49,6 +49,11 @@ export class DatabaseService {
 
 	}
 
+	// Delete film
+	deleteFilm(id: number){
+		return libPrisma.film.delete({where: {id: id}})
+	}
+
 	// Get all films
 	/*	getFilms(): Promise<Film[]> {
 	 return new Promise((resolve, reject) => {
@@ -159,22 +164,7 @@ export class DatabaseService {
 	 })
 	 }
 
-	 // Delete film
-	 deleteFilm(id: number): Promise<boolean> {
-	 return new Promise((resolve, reject) => {
-	 const sql = 'DELETE FROM films WHERE id = ?';
 
-	 this.db?.run(sql, [id]).then((res) => {
-	 if (res.changes) {
-	 resolve(res.changes > 0);
-	 log.success(`Film deleted: id: ${id}`)
-	 }
-	 }).catch(err =>{
-	 reject(err)
-	 log.error(`Error deleting film: ${err.message}`)
-	 });
-	 });
-	 }
 
 	 close(): void {
 	 this.db?.close().then(_ => {

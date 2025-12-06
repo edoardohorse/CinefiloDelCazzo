@@ -2,7 +2,8 @@ import { App } from '@/components/App.tsx';
 import { ErrorBoundary } from '@/components/ErrorBoundary.tsx';
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
+
 function ErrorBoundaryError({ error }: { error: unknown }) {
   return (
     <div>

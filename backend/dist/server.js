@@ -155,8 +155,8 @@ app.get('/api/films/:id', filmController.getFilmById);
  *         $ref: '#/components/responses/ServerError'
  */
 /*app.put('/api/films/:id', filmController.updateFilm);
-
-/!**
+ */
+/**
  * @swagger
  * /api/films/{id}:
  *   delete:
@@ -188,8 +188,8 @@ app.get('/api/films/:id', filmController.getFilmById);
  *         $ref: '#/components/responses/NotFound'
  *       500:
  *         $ref: '#/components/responses/ServerError'
- *!/
-app.delete('/api/films/:id', filmController.deleteFilm);*/
+ */
+app.delete('/api/films/:id', filmController.deleteFilm);
 /**
  * @swagger
  * /health:

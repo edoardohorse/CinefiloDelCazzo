@@ -191,7 +191,7 @@ export class FilmController {
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
-
+*/
 	// Delete film
 	deleteFilm = async (req: Request, res: Response): Promise<void> => {
 		try {
@@ -209,10 +209,10 @@ export class FilmController {
 				return;
 			}
 
-			res.json({ message: 'Film deleted successfully' });
+			res.status(200).json({ message: 'Film deleted successfully' });
 		} catch (error) {
 			log.error(`Error deleting film: ${error}`);
 			res.status(500).json({ error: 'Internal server error' });
 		}
-	};*/
+	};
 }

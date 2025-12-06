@@ -1,11 +1,19 @@
 import {useMutation, useQuery} from "@tanstack/react-query";
-import {createFilm, fetchAllFilm, fetchFilmById, QUERY_FN_FETCH_FILM, QUERY_FN_FETCH_FILM_BY_ID} from "@/api/api";
+import {
+	createFilm,
+	deleteFilm,
+	fetchAllFilm,
+	fetchFilmById,
+	QUERY_FN_FETCH_FILM,
+	QUERY_FN_FETCH_FILM_BY_ID
+} from "@/api/api";
 
 import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema} from "@/schema/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ChangeEvent, useEffect, useState} from "react";
 import {Film, FilmType} from "@cinefilodelcazzo/types";
+import {queryClient} from "@/components/Root";
 
 export const useFilm = {
 	fetchAll: ()=> {
@@ -23,6 +31,15 @@ export const useFilm = {
 		return useQuery<Film>({
 			queryKey: [QUERY_FN_FETCH_FILM_BY_ID, id],
 			queryFn: () => fetchFilmById(id),
+		})
+	},
+	deleteFilmById: ()=> {
+		return useMutation({
+			mutationFn: (id: Film['id']) => deleteFilm(id),
+			onSuccess:()=>{
+				// Invalidate and refetch users query after successful delete
+				queryClient.invalidateQueries({ queryKey: [QUERY_FN_FETCH_FILM] });
+			}
 		})
 	}
 }

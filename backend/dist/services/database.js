@@ -37,4 +37,8 @@ export class DatabaseService {
         log.success(`Film fetched: id: ${film?.id} | ${film?.name}`)
     }).catch(err => log.error(`Error fetching film: ${err.message}`))*/
     }
+    // Delete film
+    deleteFilm(id) {
+        return libPrisma.film.delete({ where: { id: id } });
+    }
 }

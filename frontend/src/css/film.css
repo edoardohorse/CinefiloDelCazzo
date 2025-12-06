@@ -18,9 +18,10 @@
 .film-info{
     display: flex;
     flex-direction: column;
-    gap: 1em;
+
     align-items: flex-start;
     box-sizing: border-box;
+    justify-content: space-between;
     padding: 2rem;
     background-color: rgba(255, 255, 255, 0.3);
     width: 100%;
@@ -31,6 +32,20 @@
     border-radius: 4px;
 }
 
+.film-info-body{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1em;
+}
+
+.film-info-actions{
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  justify-content: end;
+}
+
 .film-thumbnail{
     flex: 1;
     height: 100%;
@@ -38,6 +53,23 @@
     max-width: 800px;
     object-fit: contain;
 }
+
+
+.chip-links{
+  display: flex;
+  gap: 1em;
+}
+
+.chip-links > div{
+  border: 1px solid rgba(60, 64, 67, 0.3);
+}
+
+.btn-erase{
+  background-color: rgba(229,57,53,0.2);
+  color: var(--tgui--destructive_text_color);
+}
+
+
 
 @media (max-width: 600px) {
     .film{
