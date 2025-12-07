@@ -1,4 +1,4 @@
-import {redirect, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useFilm} from "@/hooks/useFilm";
 import {Button, Headline, LargeTitle, Spinner} from "@telegram-apps/telegram-ui";
 import {dateFormatted} from "@/utils/stringFormatter";
@@ -9,22 +9,15 @@ import {snackbar} from "@/store/snackbar-store";
 
 
 const ViewFilm = () => {
-
 	const params = useParams<{ id: string }>()
-
+	const navigate = useNavigate();
 
 	if (params.id == undefined) {
 		return null
 	}
 	const {data: film, isError} = useFilm.fetchFilmById(params.id)
 	const deleteFilm = useFilm.deleteFilmById()
-	const navigate = useNavigate();
 
-	//<editor-fold desc="ViewFilm.tsx > ViewFilm - line 22 at 06/12/2025 12:29:14">
-	console.group('ViewFilm.tsx > ViewFilm - line 22 at 06/12/2025 12:29:14');
-	console.debug(isError);
-	console.groupEnd();
-	//</editor-fold>
 	if(isError){
 		navigate("/")
 	}
@@ -43,7 +36,9 @@ const ViewFilm = () => {
 		}
 	}
 
-
+	const handleRedirectToEdit = ()=>{
+		navigate(`/edit/${params.id}`)
+	}
 
 	return (
 		<div className="film">
@@ -64,6 +59,7 @@ const ViewFilm = () => {
 							mode="bezeled"
 							size="l"
 							type="submit"
+							onClick={handleRedirectToEdit}
 						>
 							Modifica
 						</Button>

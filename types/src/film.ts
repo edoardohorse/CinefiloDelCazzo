@@ -7,8 +7,8 @@ export interface Film {
 	id?: number;
 	name: string;
 	thumbnail?: string ;
-	releaseDate?: Date;
-	endDate?: Date | null;
+	releaseDate?: string | null;
+	endDate?: string | null;
 	type: FilmType;
 	description: string | null;
 	links?: Array<string>;
@@ -17,8 +17,8 @@ export interface Film {
 
 export interface CreateFilmRequest {
 	name: string;
-	thumbnail: Blob;
-	releaseDate: string;
+	thumbnail?: string;
+	releaseDate?: string | null;
 	endDate?: string | null;
 	type: FilmType;
 	description?: string | null;
@@ -27,11 +27,18 @@ export interface CreateFilmRequest {
 
 
 export interface UpdateFilmRequest {
+	id?: number;
 	name?: string;
-	thumbnail?: Blob;
-	releaseDate?: string;
+	thumbnail?: string;
+	releaseDate?: string | null;
 	endDate?: string | null;
 	type?: FilmType;
 	description?: string | null;
 	links?: Array<string>;
+}
+
+export interface IResult<T>{
+	result: T
+	message:string;
+	error?:string;
 }

@@ -38,39 +38,6 @@ app.use(express.static(path.join(dirFrontend, 'dist')));
 /**
  * @swagger
  * /api/films:
- *   post:
- *     summary: Create a new film
- *     tags: [Films]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/CreateFilmRequest'
- *     responses:
- *       201:
- *         description: Film created successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 id:
- *                   type: integer
- *                   description: ID of the created film
- *                 message:
- *                   type: string
- *                   example: Film created successfully
- *       400:
- *         $ref: '#/components/responses/ValidationError'
- *       500:
- *         $ref: '#/components/responses/ServerError'
- */
-// @ts-ignore
-app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
-/**
- * @swagger
- * /api/films:
  *   get:
  *     summary: Get all films
  *     tags: [Films]
@@ -123,6 +90,39 @@ app.get('/api/films', filmController.getFilms);
 app.get('/api/films/:id', filmController.getFilmById);
 /**
  * @swagger
+ * /api/films:
+ *   post:
+ *     summary: Create a new film
+ *     tags: [Films]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CreateFilmRequest'
+ *     responses:
+ *       201:
+ *         description: Film created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   description: ID of the created film
+ *                 message:
+ *                   type: string
+ *                   example: Film created successfully
+ *       400:
+ *         $ref: '#/components/responses/ValidationError'
+ *       500:
+ *         $ref: '#/components/responses/ServerError'
+ */
+// @ts-ignore
+app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
+/**
+ * @swagger
  * /api/films/{id}:
  *   put:
  *     summary: Update a film
@@ -154,8 +154,7 @@ app.get('/api/films/:id', filmController.getFilmById);
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-/*app.put('/api/films/:id', filmController.updateFilm);
- */
+app.put('/api/films/:id', filmController.updateFilm);
 /**
  * @swagger
  * /api/films/{id}:
