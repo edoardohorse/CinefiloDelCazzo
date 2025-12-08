@@ -10,11 +10,6 @@ export function App() {
 	const isDark = useSignal(miniApp.isDark);
 	const snackbarInfo = useSignal(snackbarQueue);
 
-	//<editor-fold desc="App.tsx > App - line 13 at 06/12/2025 12:50:50">
-	console.group('App.tsx > App - line 13 at 06/12/2025 12:50:50');
-	console.debug(snackbarInfo);
-	console.groupEnd();
-	//</editor-fold>
 	return (
 		<AppRoot
 			appearance={isDark ? 'dark' : 'light'}
@@ -24,7 +19,7 @@ export function App() {
 			<BrowserRouter>
 				<Routes>
 					{routes.map((route) => <Route key={route.path} {...route} />)}
-					<Route path="*" element={<Navigate to="/"/>}/>
+					<Route path="*" element={<Navigate to="/list"/>}/>
 				</Routes>
 				{snackbarInfo?.show && <Snackbar
 
@@ -32,7 +27,7 @@ export function App() {
           description={snackbarInfo?.message}
           onClose={() => {
 						snackbarQueue.set({show: false})
-					}}>Message</Snackbar>}
+					}}>{snackbarInfo.title}</Snackbar>}
 			</BrowserRouter>
 		</AppRoot>
 	);

@@ -4,25 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Works delete">
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CreateFilm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/EditFilm.tsx" afterDir="false" />
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Works update and create with notification">
+      <change afterPath="$PROJECT_DIR$/frontend/src/store/modal-view-film.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/controllers/filmController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dist/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/dist/services/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/services/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/controllers/filmController.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/services/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/services/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/useFilm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/config/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/config/axios.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/FormFilm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/schema/zod.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/schema/zod.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/dist/film.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/dist/film.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/types/src/film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/types/src/film.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/snackbar-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/snackbar-store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +56,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/node_modules/@telegram-apps/telegram-ui/dist/components/Overlays/Modal/Modal.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/react-router-dom/dist/index.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/react-router/dist/lib/components.d.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/node_modules/react-router/dist/lib/context.d.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -71,42 +69,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Node.js.Unnamed.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.filmController.ts.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.server.js.executor&quot;: &quot;Debug&quot;,
-    &quot;Node.js.server.ts.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev/refactor-be&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;24.3.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;24.3.3&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/ubuntu/Documents/CinefiloDelCazzo/backend/src/server.ts&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build:backend.executor&quot;: &quot;Run&quot;,
-    &quot;npm.frontend &gt; dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start.executor&quot;: &quot;Debug&quot;,
-    &quot;npm.start_debug.executor&quot;: &quot;Debug&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.26911315&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/ubuntu/Documents/CinefiloDelCazzo/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.Unnamed.executor": "Debug",
+    "Node.js.filmController.ts.executor": "Debug",
+    "Node.js.server.js.executor": "Debug",
+    "Node.js.server.ts.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "dev/refactor-be",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "24.3.0",
+    "javascript.nodejs.core.library.typings.version": "24.3.3",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "/home/ubuntu/Documents/CinefiloDelCazzo/frontend/src/store",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "npm.build:backend.executor": "Run",
+    "npm.frontend > dev.executor": "Run",
+    "npm.start.executor": "Debug",
+    "npm.start_debug.executor": "Debug",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "settings.editor.splitter.proportion": "0.26911315",
+    "ts.external.directory.path": "/home/ubuntu/Documents/CinefiloDelCazzo/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/store" />
       <recent name="$PROJECT_DIR$/frontend/src/pages/Cinema" />
       <recent name="$PROJECT_DIR$/backend" />
     </key>
@@ -196,7 +195,7 @@
       <workItem from="1761580553681" duration="17851000" />
       <workItem from="1761635965501" duration="79000" />
       <workItem from="1761641892770" duration="21863000" />
-      <workItem from="1765127826653" duration="1768000" />
+      <workItem from="1765127826653" duration="7735000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -310,7 +309,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765022088627</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Works update and create with notification">
+      <option name="closed" value="true" />
+      <created>1765129631280</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1765129631280</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +335,7 @@
     <MESSAGE value="Get films and createFilm works with Neon (prism)" />
     <MESSAGE value="Works form create film" />
     <MESSAGE value="Works delete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Works delete" />
+    <MESSAGE value="Works update and create with notification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Works update and create with notification" />
   </component>
 </project>

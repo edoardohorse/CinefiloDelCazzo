@@ -6,7 +6,7 @@ import multer from 'multer';
 import {FilmController} from "./controllers/filmController.js";
 import swaggerOptions from "./config/swagger.js";
 import path from 'path'
-
+import {log} from "./utils.js";
 
 // Configure multer
 const upload = multer();
@@ -230,7 +230,9 @@ app.delete('/api/films/:id', filmController.deleteFilm);
  *                   example: 2023-01-01T00:00:00.000Z
  */
 app.get('/health', (req, res) => {
-	res.json({ status: 'OK', timestamp: new Date().toISOString() });
+	const result = { status: 'OK', timestamp: new Date().toISOString() }
+	res.json(result);
+	log.success(`Status: ${result.status} - ${result.timestamp}`);
 });
 
 /**

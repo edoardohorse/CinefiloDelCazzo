@@ -5,6 +5,7 @@ export type SnackbarSeverity = 'success' | 'error' | 'warning' | 'info';
 
 export interface SnackbarMessage {
 	show: boolean;
+	title?: string;
 	id?: string;
 	message?: string;
 	severity?: SnackbarSeverity;
@@ -18,11 +19,11 @@ export interface SnackbarMessage {
 
 // Create reactive signals
 export const snackbarQueue = signal<SnackbarMessage | null>(null);
-export const activeSnackbar = signal<SnackbarMessage | null>(null);
 
 // Methods to manage snackbars
 export const showSnackbar = (
 	message: string,
+	title: string = "Message",
 	severity: SnackbarSeverity = 'info',
 	duration: number = 3000,
 	action?: { label: string; onClick: () => void }
@@ -30,6 +31,7 @@ export const showSnackbar = (
 	const id = Math.random().toString(36).substr(2, 9);
 	const newMessage: SnackbarMessage = {
 		show: true,
+		title,
 		id,
 		message,
 		severity,
@@ -48,16 +50,16 @@ export const showSnackbar = (
 
 // Convenience methods with tma.js signals
 export const snackbar = {
-	success: (message: string, duration?: number, action?: { label: string; onClick: () => void }) =>
-		showSnackbar(message, 'success', duration, action),
+	success: (message: string, title?:string, duration?: number, action?: { label: string; onClick: () => void }) =>
+		showSnackbar(message, title || 'Fatto','success', duration, action),
 
-	error: (message: string, duration?: number, action?: { label: string; onClick: () => void }) =>
-		showSnackbar(message, 'error', duration, action),
+	error: (message: string, title?:string,duration?: number, action?: { label: string; onClick: () => void }) =>
+		showSnackbar(message, title || 'Error','error', duration, action),
 
-	warning: (message: string, duration?: number, action?: { label: string; onClick: () => void }) =>
-		showSnackbar(message, 'warning', duration, action),
+	warning: (message: string, title?:string,duration?: number, action?: { label: string; onClick: () => void }) =>
+		showSnackbar(message, title || 'Attenzione','warning', duration, action),
 
-	info: (message: string, duration?: number, action?: { label: string; onClick: () => void }) =>
-		showSnackbar(message, 'info', duration, action),
+	info: (message: string, title?:string,duration?: number, action?: { label: string; onClick: () => void }) =>
+		showSnackbar(message, title || 'Info','info', duration, action),
 };
 

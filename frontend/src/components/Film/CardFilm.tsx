@@ -3,6 +3,7 @@ import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
+import {showViewFilm} from "@/store/modal-view-film";
 
 type TCardFilmProps = {
 	film: Film;
@@ -29,10 +30,11 @@ const CardFilm = ({film}: TCardFilmProps) => {
 	const navigate  = useNavigate();
 
 	const onClickCard = ()=>{
-		navigate(`/film/${film.id}`);
+		navigate(`/list/${film.id}`);
+		// showViewFilm(film.id)
 	}
 	return (
-		<Card type="ambient" key={film.id} onClick={onClickCard} style={{ cursor: "pointer" }}>
+		<Card type="ambient" key={film.id} onClick={onClickCard} style={{ cursor: "pointer", minWidth:"30vw" }}>
 			<Fragment>
 				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img

@@ -8,14 +8,14 @@ import {snackbar} from "@/store/snackbar-store";
 
 
 
-const ViewFilm = () => {
-	const params = useParams<{ id: string }>()
+const ViewFilm = ({id} :{ id: string }) => {
+
 	const navigate = useNavigate();
 
-	if (params.id == undefined) {
+	if (id == undefined) {
 		return null
 	}
-	const {data: film, isError} = useFilm.fetchFilmById(params.id)
+	const {data: film, isError} = useFilm.fetchFilmById(id)
 	const deleteFilm = useFilm.deleteFilmById()
 
 	if(isError){
@@ -27,9 +27,9 @@ const ViewFilm = () => {
 	}
 
 	const handleDelete = async() => {
-		if(params?.id == undefined) return
+		if(id == undefined) return
 		if (window.confirm('Confirm?')) {
-			const res = await deleteFilm.mutateAsync(parseInt(params.id))
+			const res = await deleteFilm.mutateAsync(parseInt(id))
 
 			snackbar.success(res.message)
 			navigate("/list")
@@ -37,7 +37,7 @@ const ViewFilm = () => {
 	}
 
 	const handleRedirectToEdit = ()=>{
-		navigate(`/edit/${params.id}`)
+		navigate(`/edit/${id}`)
 	}
 
 	return (
@@ -50,7 +50,7 @@ const ViewFilm = () => {
 					</div>
 					<div>
 						{film?.releaseDate && <Headline weight={"1"}>{dateFormatted(film.releaseDate)}</Headline>}
-						{film.endDate && <Headline weight={"1"}>{dateFormatted(film.endDate)}</Headline>}
+						{film?.endDate && <Headline weight={"1"}>{dateFormatted(film.endDate)}</Headline>}
 					</div>
 					{film.links && <ChipLinks links={film.links}/>}
 					</div>
