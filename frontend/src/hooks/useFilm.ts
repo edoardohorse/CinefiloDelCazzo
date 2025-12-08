@@ -22,6 +22,7 @@ export const useFilm = {
 		return useQuery<Film[]>({
 			queryKey: [QUERY_FN_FETCH_FILM],
 			queryFn: () => fetchAllFilm(),
+			staleTime: Infinity
 		})
 	},
 	createFilm: () => {
@@ -73,6 +74,7 @@ export type TTypeForm = 'create'|'update'
 export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = defaultValues, type :TTypeForm) => {
 	const navigate = useNavigate()
 	const [hasEndDate, setHasEndDate] = useState<boolean>(false)
+	const [imageURI, setImageURI] = useState<Blob | null>(null)
 	const schema = type == 'create'? createFilmSchema: updateFilmSchema
 
 	const form = useForm<typeof formInit>({
@@ -80,6 +82,24 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 		defaultValues: formInit
 	})
 
+
+	const reader = new FileReader();
+	const image = form.watch('thumbnail')
+
+	reader.onload = (e) => {
+		setImageURI(e.target?.result)
+	}
+
+	useEffect(function () {
+		if(image){
+			reader.readAsDataURL(image as File)
+		}
+	}, [image]);
+
+	const removeThumbnail = ()=>{
+		form.resetField('thumbnail')
+		setImageURI(null)
+	}
 
 	const hasErrors = Object.keys(form.formState.errors).length > 0;
 	const endDate = form.watch('endDate')
@@ -184,5 +204,7 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 		hasEndDate,
 		setHasEndDate,
 		onChangeLinks,
+		imageURI,
+		removeThumbnail
 	}
 }

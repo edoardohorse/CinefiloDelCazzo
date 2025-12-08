@@ -14,6 +14,7 @@ import {TextAreaLinks} from "@/components/Film/TextAreaLinks";
 import {Controller} from "react-hook-form";
 import {CreateFilmFormData} from "@/schema/zod";
 import {UpdateFilmRequest} from "@cinefilodelcazzo/types/src/film";
+import {PreviewImage} from "@/components/Film/PreviewImage";
 
 const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, type: TTypeForm}) => {
 
@@ -29,7 +30,9 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 		links,
 		hasEndDate,
 		setHasEndDate,
-		onChangeLinks
+		onChangeLinks,
+		imageURI,
+		removeThumbnail
 	} = useFormFilm(film, type);
 
 	const {watch, formState: {errors}, handleSubmit} = form
@@ -40,6 +43,8 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 	if(type == 'update') {
 		handleOnSubmit = handleUpdateFilm
 	}
+
+
 
 	return (
 		<List>
@@ -70,26 +75,23 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 					<Input {...field} header="Fino a" type="date" disabled={!hasEndDate} status={errors.endDate && "error"} />)}
 				/>
 
+				{/*Links*/}
+				<TextAreaLinks links={links} setLinks={onChangeLinks}/>
 
 				{/*File*/}
 				<div style={{display: "flex", alignItems: "center"}}>
 
 					{type === 'create' &&
-            <FileInput label={"Thumbnail *"} onChange={onUpload} className={"test"}/>
+            <FileInput label={"Thumbnail"} onChange={onUpload} className={"test"}/>
 					}
 					{errors.thumbnail && (
 						<Text style={{color: "red"}}>{errors.thumbnail.message}</Text>
 					)}
-					{nFileUploaded != 0 &&
-            <Cell>
-              <Badge mode="primary" type="number">{nFileUploaded}</Badge>
-              <Text>Allegato</Text>
-            </Cell>
+					{imageURI && <PreviewImage uri={imageURI} onErase={removeThumbnail}/>
 					}
 				</div>
 
-				{/*Links*/}
-				<TextAreaLinks links={links} setLinks={onChangeLinks}/>
+
 
 
 				<FixedLayout vertical="bottom" style={{padding: "1em", display: "flex", alignItems: "center", gap: "1em", position: "relative"}}>

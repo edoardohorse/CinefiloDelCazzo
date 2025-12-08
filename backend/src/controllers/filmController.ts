@@ -31,7 +31,7 @@ export class FilmController {
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
 		// @ts-ignore
-		// let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
 
 		if(body == undefined) {
 			log.error('Error creating film: body is empty');
@@ -74,7 +74,7 @@ export class FilmController {
 		const filmData: CreateFilmRequest = req.body;
 		const film = {
 			name: filmData.name,
-			// thumbnail: bufferThumbnail,
+			thumbnail: bufferThumbnail?.toString('base64') || null,
 			releaseDate: filmData.releaseDate? new Date(filmData.releaseDate): null,
 			endDate: filmData.endDate ? new Date(filmData.endDate) : null,
 			type: filmData.type,
@@ -113,6 +113,7 @@ export class FilmController {
 			}
 
 			const result = await this.dbService.createFilm(film);
+
 			res.status(201).json({ result: result, message: SUCCESS_CREATE_FILM } as IResult<Film>);
 		} catch (error) {
 			log.error(`Error creating film: ${error}`);

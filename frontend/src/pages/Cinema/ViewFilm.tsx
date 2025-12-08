@@ -17,12 +17,14 @@ const ViewFilm:FC<{id?:string}> = ({id} :{ id?: string }) => {
 		return null
 	}
 
-	const {data: film, isError} = useFilm.fetchFilmById(id)
+	const {data: films, isError} = useFilm.fetchAll()
 	const deleteFilm = useFilm.deleteFilmById()
 
 	if(isError){
 		navigate("/")
 	}
+
+	const film = films?.find(f=>String(f.id) === id)
 
 	if (film == undefined) {
 		return (<Spinner size={"l"}/>)
@@ -44,6 +46,7 @@ const ViewFilm:FC<{id?:string}> = ({id} :{ id?: string }) => {
 
 	return (
 		<div className="film">
+			<img src={`${film.thumbnail}`} className="film-thumbnail" alt={'film'}/>
 			<div className="film-info-wrapper">
 				<div className="film-info">
 					<div className="film-info-body">
@@ -79,7 +82,7 @@ const ViewFilm:FC<{id?:string}> = ({id} :{ id?: string }) => {
 				</div>
 
 			</div>
-			<img src={`${film.thumbnail}`} className="film-thumbnail" alt={'film'}/>
+
 		</div>
 	)
 }

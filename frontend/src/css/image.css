@@ -1,0 +1,25 @@
+.preview-image-wrapper{
+  display: flex;
+  position: relative;
+  width: 200px;
+  box-shadow: 0px 0px 10px -1px black;
+  margin: 1em;
+}
+
+.preview-image{
+  /*aspect-ratio: 16/9;*/
+  width: 100%;
+}
+
+.preview-image-btn{
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50% 50%;
+  transform: translate(50%, -50%);
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 10px -1px black;
+  background: var(--tgui--destructive_background);
+}
