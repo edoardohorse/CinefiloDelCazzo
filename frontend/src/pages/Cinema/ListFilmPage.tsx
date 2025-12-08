@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useFilm} from "@/hooks/useFilm";
 import {CardFilm} from "@/components/Film/CardFilm";
-import { Placeholder, Spinner} from "@telegram-apps/telegram-ui";
+import { Placeholder} from "@telegram-apps/telegram-ui";
 import {LoadingPage} from "@/pages/LoadingPage";
 
 

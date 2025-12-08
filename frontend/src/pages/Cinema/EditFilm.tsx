@@ -1,7 +1,6 @@
 import {FormFilm} from "@/components/Film/FormFilm";
 import { useFilm} from "@/hooks/useFilm";
 import {useParams} from "react-router-dom";
-import {Spinner} from "@telegram-apps/telegram-ui";
 import type {FC} from "react";
 import {LoadingPage} from "@/pages/LoadingPage";
 

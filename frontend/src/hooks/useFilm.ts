@@ -74,10 +74,11 @@ export type TTypeForm = 'create'|'update'
 export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = defaultValues, type :TTypeForm) => {
 	const navigate = useNavigate()
 	const [hasEndDate, setHasEndDate] = useState<boolean>(false)
-	const [imageURI, setImageURI] = useState<Blob | null>(null)
+	const [imageURI, setImageURI] = useState<Blob | string | null>(null)
 	const schema = type == 'create'? createFilmSchema: updateFilmSchema
 
 	const form = useForm<typeof formInit>({
+		// @ts-ignore
 		resolver: zodResolver(schema),
 		defaultValues: formInit
 	})
@@ -86,7 +87,7 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 	const image = form.watch('thumbnail')
 
 	reader.onload = (e) => {
-		setImageURI(e.target?.result)
+		setImageURI(e.target?.result as string)
 	}
 
 	useEffect(function () {
@@ -121,6 +122,7 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 		};
 		if (data.thumbnail) {
 			// Convert File to Buffer if needed for your API
+			// @ts-ignore
 			createFilmRequest.thumbnail = await data.thumbnail.arrayBuffer();
 		}
 
@@ -136,6 +138,7 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 
 		if (typeof data.thumbnail == 'object') {
 			// Convert File to Buffer if needed for your API
+			// @ts-ignore
 			updateFilmRequest.thumbnail = await (data.thumbnail as File).arrayBuffer();
 		}
 		else{

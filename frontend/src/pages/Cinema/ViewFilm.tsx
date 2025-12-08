@@ -1,6 +1,6 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {useFilm} from "@/hooks/useFilm";
-import {Button, Headline, LargeTitle, Spinner} from "@telegram-apps/telegram-ui";
+import {Button, Headline, LargeTitle} from "@telegram-apps/telegram-ui";
 import {dateFormatted} from "@/utils/stringFormatter";
 import {ChipLinks} from "@/components/Film/ChipLinks";
 import '@/css/film.css'

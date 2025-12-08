@@ -3,7 +3,6 @@ import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";
 import {useNavigate} from "react-router-dom";
-import {showViewFilm} from "@/store/modal-view-film";
 
 type TCardFilmProps = {
 	film: Film;

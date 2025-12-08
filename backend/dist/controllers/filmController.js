@@ -1,5 +1,8 @@
 import { DatabaseService } from '../services/database.js';
 import { log } from "../utils.js";
+const SUCCESS_CREATE_FILM = 'Film created successfully';
+const SUCCESS_UPDATE_FILM = 'Film updated successfully';
+const SUCCESS_DELETE_FILM = 'Film deleted successfully';
 export class FilmController {
     dbService;
     constructor() {
@@ -8,7 +11,7 @@ export class FilmController {
     validateCreateFilmRequest(req, res) {
         const { body, files } = req;
         // @ts-ignore
-        // let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+        let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null;
         if (body == undefined) {
             log.error('Error creating film: body is empty');
             res.status(500).json({ error: 'Internal server error' });
@@ -27,20 +30,6 @@ export class FilmController {
             });
             return { res: false, data: null };
         }
-        /*		if(bufferThumbnail == null ) {
-                    res.status(400).json({
-                        error: 'Missing required fields: thumbnail'
-                    });
-                    log.error('Film CREATE: Missing required fields: thumbnail')
-                    return {res: false, data: null};
-                }*/
-        if (body.releaseDate === undefined) {
-            res.status(400).json({
-                error: 'Missing required fields: releaseDate'
-            });
-            log.error('Film CREATE: Missing required fields: releaseDate');
-            return { res: false, data: null };
-        }
         if (body.type === undefined) {
             res.status(400).json({
                 error: 'Missing required fields: type'
@@ -51,13 +40,35 @@ export class FilmController {
         const filmData = req.body;
         const film = {
             name: filmData.name,
-            // thumbnail: bufferThumbnail,
-            releaseDate: new Date(filmData.releaseDate),
+            thumbnail: bufferThumbnail?.toString('base64') || null,
+            releaseDate: filmData.releaseDate ? new Date(filmData.releaseDate) : null,
             endDate: filmData.endDate ? new Date(filmData.endDate) : null,
             type: filmData.type,
             description: filmData.description || null,
             links: filmData.links || []
         };
+        // @ts-ignore
+        return { res: true, data: film };
+    }
+    validateEditFilmRequest(req, res) {
+        const { body: film, files } = req;
+        let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null;
+        // @ts-ignore
+        // let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+        delete film.id;
+        if (film.releaseDate == "") {
+            film.releaseDate = null;
+        }
+        if (film.endDate == "") {
+            film.endDate = null;
+        }
+        if (Object.keys(req.files).length == 0) {
+            film.thumbnail = undefined;
+        }
+        else {
+            film.thumbnail = bufferThumbnail?.toString('base64');
+        }
+        // @ts-ignore
         return { res: true, data: film };
     }
     // Create a new film
@@ -69,7 +80,7 @@ export class FilmController {
                 return;
             }
             const result = await this.dbService.createFilm(film);
-            res.status(201).json({ result, message: 'Film created successfully' });
+            res.status(201).json({ result: result, message: SUCCESS_CREATE_FILM });
         }
         catch (error) {
             log.error(`Error creating film: ${error}`);
@@ -84,7 +95,7 @@ export class FilmController {
             const filmsWithBase64 = films.map(film => ({
                 ...film,
                 // @ts-ignore
-                thumbnail: `data:image/png;base64,${film?.thumbnail?.toString('base64')}`
+                thumbnail: film?.thumbnail ? `data:image/png;base64,${film?.thumbnail?.toString('base64')}` : null
             }));
             res.json(filmsWithBase64);
         }
@@ -127,18 +138,16 @@ export class FilmController {
                 res.status(400).json({ error: 'Invalid film ID' });
                 return;
             }
-            const updateData = req.body;
-            //<editor-fold desc="filmController.ts > updateFilm - line 162 at 07/12/2025 14:48:38">
-            console.group('filmController.ts > updateFilm - line 162 at 07/12/2025 14:48:38');
-            console.debug(req.body);
-            console.groupEnd();
-            //</editor-fold>
-            const updated = await this.dbService.updateFilm(id, updateData);
+            const { res: resValidate, data: film } = this.validateEditFilmRequest(req, res);
+            let updated = null;
+            if (film != null) {
+                updated = await this.dbService.updateFilm(id, film);
+            }
             if (!updated) {
                 res.status(404).json({ error: 'Film not found' });
                 return;
             }
-            res.status(200).json({ message: 'Film updated successfully' });
+            res.status(200).json({ result: updated, message: SUCCESS_UPDATE_FILM });
         }
         catch (error) {
             log.error(`Error updating film: ${error}`);
@@ -158,7 +167,7 @@ export class FilmController {
                 res.status(404).json({ error: 'Film not found' });
                 return;
             }
-            res.status(200).json({ message: 'Film deleted successfully' });
+            res.status(200).json({ result: deleted, message: SUCCESS_DELETE_FILM });
         }
         catch (error) {
             log.error(`Error deleting film: ${error}`);

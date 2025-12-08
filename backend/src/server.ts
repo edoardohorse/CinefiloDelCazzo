@@ -137,6 +137,7 @@ app.get('/api/films/:id', filmController.getFilmById);
 // @ts-ignore
 app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.createFilm);
 
+
 /**
  * @swagger
  * /api/films/{id}:
@@ -170,6 +171,7 @@ app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmCon
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
+// @ts-ignore
 app.put('/api/films/:id', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.updateFilm);
 
 /**

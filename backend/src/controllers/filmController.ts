@@ -31,7 +31,7 @@ export class FilmController {
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
 		// @ts-ignore
-		let bufferThumbnail: Film["thumbnail"] | null = req.files?.thumbnail?.[0].buffer || null
+		let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null
 
 		if(body == undefined) {
 			log.error('Error creating film: body is empty');
@@ -74,13 +74,14 @@ export class FilmController {
 			links: filmData.links || []
 		};
 
+		// @ts-ignore
 		return {res: true, data: film}
 	}
 
 	validateEditFilmRequest(req: UpdateFilmRequestWithFiles, res: Response):  {res: boolean, data: Film | null}  {
 		const {body: film, files} = req;
 
-		let bufferThumbnail: Film["thumbnail"] | null = req.files?.thumbnail?.[0].buffer || null
+		let bufferThumbnail = req.files?.thumbnail?.[0].buffer || null
 
 		// @ts-ignore
 		// let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
@@ -102,6 +103,7 @@ export class FilmController {
 			film.thumbnail = bufferThumbnail?.toString('base64')
 		}
 
+		// @ts-ignore
 		return {res: true, data: film}
 	}
 
@@ -174,7 +176,7 @@ export class FilmController {
 	};
 
 	// Update film
-	updateFilm = async (req: Request, res: Response): Promise<void> => {
+	updateFilm = async (req: UpdateFilmRequestWithFiles, res: Response): Promise<void> => {
 		try {
 			const id = parseInt(req.params.id);
 
@@ -185,8 +187,10 @@ export class FilmController {
 
 			const {res: resValidate, data:film}  = this.validateEditFilmRequest(req, res);
 
-
-			const updated = await this.dbService.updateFilm(id, film);
+			let updated = null
+			if(film != null){
+				updated = await this.dbService.updateFilm(id, film);
+			}
 
 			if (!updated) {
 				res.status(404).json({ error: 'Film not found' });

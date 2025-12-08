@@ -7,8 +7,8 @@ export class DatabaseService {
             data: {
                 name: film.name,
                 thumbnail: film?.thumbnail,
-                releaseDate: film?.releaseDate?.toISOString(),
-                endDate: film?.endDate?.toISOString(),
+                releaseDate: film?.releaseDate,
+                endDate: film?.endDate,
                 type: film.type,
                 links: film.links,
             }

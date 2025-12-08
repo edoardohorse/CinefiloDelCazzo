@@ -6,8 +6,7 @@ import {
 	FileInput,
 	List,
 	Button,
-	FixedLayout,
-	Badge
+	FixedLayout
 } from "@telegram-apps/telegram-ui";
 import {TTypeForm, useFormFilm} from "@/hooks/useFilm";
 import {TextAreaLinks} from "@/components/Film/TextAreaLinks";
@@ -16,7 +15,7 @@ import {CreateFilmFormData} from "@/schema/zod";
 import {UpdateFilmRequest} from "@cinefilodelcazzo/types/src/film";
 import {PreviewImage} from "@/components/Film/PreviewImage";
 
-const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, type: TTypeForm}) => {
+const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, type: TTypeForm }) => {
 
 	const {
 		form,
@@ -39,16 +38,19 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 
 	let handleOnSubmit = handleCreateFilm
 
-	if(type == 'update') {
+	if (type == 'update') {
+		// @ts-ignore
 		handleOnSubmit = handleUpdateFilm
 	}
 
 	return (
 		<List>
+			{/*// @ts-ignore*/}
 			<form onSubmit={handleSubmit(handleOnSubmit)}>
 				{/*Name*/}
 				<Controller name={"name"} control={form.control} render={(({field}) =>
-					<Input {...field} header="Nome *" placeholder="Nome film" type="text" status={errors.name && "error"} tabIndex={1}/> )}
+					<Input {...field} header="Nome *" placeholder="Nome film" type="text" status={errors.name && "error"}
+					       tabIndex={1}/>)}
 				/>
 
 				{/*Anime*/}
@@ -57,8 +59,11 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 				</Cell>
 
 				{/*Data uscita*/}
-				<Controller name={"releaseDate"} control={form.control} render={(({field}) =>
-						<Input {...field} onChange={(e)=>field.onChange(e)} header="Data d'uscita" type="date" status={errors.releaseDate && "error"}/>)}
+				<Controller name={"releaseDate"} control={form.control} render={(({field}) => {
+					{/*// @ts-ignore*/ }
+					return <Input {...field} onChange={(e) => field.onChange(e)} header="Data d'uscita" type="date"
+					              status={errors.releaseDate && "error"}/>
+				})}
 				/>
 
 
@@ -66,8 +71,11 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 				<Cell Component="label" after={<Switch checked={hasEndDate} onChange={() => setHasEndDate(!hasEndDate)}/>}>
 					<Text>Fino a...</Text>
 				</Cell>
-				<Controller name={"endDate"} control={form.control} render={(({field}) =>
-					<Input {...field} header="Fino a" type="date" disabled={!hasEndDate} status={errors.endDate && "error"} />)}
+				<Controller name={"endDate"} control={form.control} render={(({field}) => {
+					{/*// @ts-ignore*/}
+					return <Input {...field} header="Fino a" type="date" disabled={!hasEndDate}
+					              status={errors.endDate && "error"}/>
+				})}
 				/>
 
 				{/*Links*/}
@@ -85,18 +93,17 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 				</div>
 
 
-
-
-				<FixedLayout vertical="bottom" style={{padding: "1em", display: "flex", alignItems: "center", gap: "1em", position: "relative"}}>
+				<FixedLayout vertical="bottom"
+				             style={{padding: "1em", display: "flex", alignItems: "center", gap: "1em", position: "relative"}}>
 					<Button
 						mode="bezeled"
 						size="l"
-						disabled={createIsPending || updateIsPending }
+						disabled={createIsPending || updateIsPending}
 						type="submit"
 						loading={createIsPending}
 						style={{flex: 1}}
 					>
-						{type ==='create' ? 'Aggiungi film' : 'Modifica film'}
+						{type === 'create' ? 'Aggiungi film' : 'Modifica film'}
 					</Button>
 					<Button mode={"outline"} size={"l"} onClick={reset}>Reset</Button>
 				</FixedLayout>
