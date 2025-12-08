@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const PORT = '10000'
-const BASE_URL = `http://192.168.1.249:${PORT}/api`;
+// const PORT = '10000'
+const BASE_URL = `/api`;
 
 
 const api = axios.create({
