@@ -46,7 +46,7 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 			<form onSubmit={handleSubmit(handleOnSubmit)}>
 				{/*Name*/}
 				<Controller name={"name"} control={form.control} render={(({field}) =>
-					<Input {...field} header="Nome *" placeholder="Nome film" type="text" status={errors.name && "error"}/> )}
+					<Input {...field} header="Nome *" placeholder="Nome film" type="text" status={errors.name && "error"} tabIndex={1}/> )}
 				/>
 
 				{/*Anime*/}

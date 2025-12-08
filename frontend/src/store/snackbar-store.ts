@@ -18,7 +18,9 @@ export interface SnackbarMessage {
 }
 
 // Create reactive signals
-export const snackbarQueue = signal<SnackbarMessage | null>(null);
+export const snackbarQueue = signal<SnackbarMessage | null>({
+	show: false,
+});
 
 // Methods to manage snackbars
 export const showSnackbar = (
