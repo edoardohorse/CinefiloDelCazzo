@@ -7,7 +7,7 @@ import {
 	List,
 	Button,
 	FixedLayout,
-	Badge, Snackbar
+	Badge
 } from "@telegram-apps/telegram-ui";
 import {TTypeForm, useFormFilm} from "@/hooks/useFilm";
 import {TextAreaLinks} from "@/components/Film/TextAreaLinks";
@@ -25,7 +25,6 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 		onUpload,
 		createIsPending,
 		updateIsPending,
-		snackBar,
 		reset,
 		links,
 		hasEndDate,
@@ -41,11 +40,7 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 	if(type == 'update') {
 		handleOnSubmit = handleUpdateFilm
 	}
-	//<editor-fold desc="FormFilm.tsx > FormFilm - line 44 at 07/12/2025 15:52:51">
-	console.group('FormFilm.tsx > FormFilm - line 44 at 07/12/2025 15:52:51');
-	console.debug(form.getValues());
-	console.groupEnd();
-	//</editor-fold>
+
 	return (
 		<List>
 			<form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -97,8 +92,7 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 				<TextAreaLinks links={links} setLinks={onChangeLinks}/>
 
 
-				<FixedLayout vertical="bottom"
-				             style={{padding: "1em", display: "flex", alignItems: "center", gap: "1em"}}>
+				<FixedLayout vertical="bottom" style={{padding: "1em", display: "flex", alignItems: "center", gap: "1em", position: "relative"}}>
 					<Button
 						mode="bezeled"
 						size="l"

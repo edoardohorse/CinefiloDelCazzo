@@ -2,8 +2,9 @@ import {FormFilm} from "@/components/Film/FormFilm";
 import { useFilm} from "@/hooks/useFilm";
 import {useParams} from "react-router-dom";
 import {Spinner} from "@telegram-apps/telegram-ui";
+import type {FC} from "react";
 
-export const EditFilm = () => {
+export const EditFilm: FC = () => {
 
 	const params = useParams<{ id: string }>()
 

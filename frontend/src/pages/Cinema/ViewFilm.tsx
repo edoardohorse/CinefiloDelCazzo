@@ -5,16 +5,18 @@ import {dateFormatted} from "@/utils/stringFormatter";
 import {ChipLinks} from "@/components/Film/ChipLinks";
 import '@/css/film.css'
 import {snackbar} from "@/store/snackbar-store";
+import {FC} from "react";
 
 
 
-const ViewFilm = ({id} :{ id: string }) => {
+const ViewFilm:FC<{id?:string}> = ({id} :{ id?: string }) => {
 
 	const navigate = useNavigate();
 
 	if (id == undefined) {
 		return null
 	}
+
 	const {data: film, isError} = useFilm.fetchFilmById(id)
 	const deleteFilm = useFilm.deleteFilmById()
 

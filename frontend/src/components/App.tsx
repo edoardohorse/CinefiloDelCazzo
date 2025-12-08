@@ -4,6 +4,7 @@ import {AppRoot, Snackbar} from '@telegram-apps/telegram-ui';
 
 import {routes} from '@/navigation/routes.tsx';
 import {snackbarQueue} from "@/store/snackbar-store";
+import {WrapperPage} from "@/pages/Cinema/WrapperPage";
 
 export function App() {
 	// const lp = useLaunchParams();
@@ -18,7 +19,7 @@ export function App() {
 		>
 			<BrowserRouter>
 				<Routes>
-					{routes.map((route) => <Route key={route.path} {...route} />)}
+					{routes.map((route) => <Route key={route.path} path={route.path} element={<WrapperPage route={route}/>}  />)}
 					<Route path="*" element={<Navigate to="/list"/>}/>
 				</Routes>
 				{snackbarInfo?.show && <Snackbar

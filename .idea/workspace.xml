@@ -4,19 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Works update and create with notification">
-      <change afterPath="$PROJECT_DIR$/frontend/src/store/modal-view-film.ts" afterDir="false" />
+    <list default="true" id="d678f74f-fc68-4d71-a687-ebab9e05123a" name="Changes" comment="Works edit UI CinemaPage">
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/ListFilmPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/WrapperPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/server.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/server.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/CardFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/config/axios.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/config/axios.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Film/FormFilm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/navigation/routes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CinemaPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/CreateFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/CreateFilm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/EditFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/EditFilm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/Cinema/ViewFilm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/store/snackbar-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/snackbar-store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/stringFormatter.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +193,7 @@
       <workItem from="1761580553681" duration="17851000" />
       <workItem from="1761635965501" duration="79000" />
       <workItem from="1761641892770" duration="21863000" />
-      <workItem from="1765127826653" duration="7735000" />
+      <workItem from="1765127826653" duration="10532000" />
     </task>
     <task id="LOCAL-00001" summary="Added Backend">
       <option name="closed" value="true" />
@@ -317,7 +315,23 @@
       <option name="project" value="LOCAL" />
       <updated>1765129631280</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Works edit UI CinemaPage">
+      <option name="closed" value="true" />
+      <created>1765181683145</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1765181683145</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Works edit UI CinemaPage">
+      <option name="closed" value="true" />
+      <created>1765181692162</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1765181692162</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,6 +350,7 @@
     <MESSAGE value="Works form create film" />
     <MESSAGE value="Works delete" />
     <MESSAGE value="Works update and create with notification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Works update and create with notification" />
+    <MESSAGE value="Works edit UI CinemaPage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Works edit UI CinemaPage" />
   </component>
 </project>
