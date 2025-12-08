@@ -13,7 +13,7 @@ const baseFilmSchema = z.object({
 
 // Create film schema (includes thumbnail as required)
 export const createFilmSchema = baseFilmSchema.extend({
-	thumbnail: z.instanceof(File, { message: 'Aggiungere una foto di copertina' })
+	thumbnail: z.instanceof(File)
 		.refine((file) => file.size <= 20 * 1024 * 1024, 'File size must be less than 20MB')
 		.refine((file) =>
 				['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
@@ -25,13 +25,12 @@ export const createFilmSchema = baseFilmSchema.extend({
 export const updateFilmSchema = baseFilmSchema.extend({
 	id: z.number(),
 	name: z.string().min(1, 'Name is required').max(100, 'Name is too long').optional(),
-	/*thumbnail: z.instanceof(File, { message: 'Thumbnail must be a valid file' })
+	thumbnail: z.union([z.string() ,z.instanceof(File)
 		.refine((file) => file.size <= 5 * 1024 * 1024, 'File size must be less than 5MB')
 		.refine((file) =>
 				['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type),
 			'Only .jpg, .png, and .webp formats are supported'
-		).optional(),*/
-	releaseDate: z.string().optional(),
+		)]).optional(),
 	type: z.nativeEnum(FilmType).optional(),
 }).partial();
 

@@ -3,6 +3,7 @@ import { useFilm} from "@/hooks/useFilm";
 import {useParams} from "react-router-dom";
 import {Spinner} from "@telegram-apps/telegram-ui";
 import type {FC} from "react";
+import {LoadingPage} from "@/pages/LoadingPage";
 
 export const EditFilm: FC = () => {
 
@@ -12,10 +13,12 @@ export const EditFilm: FC = () => {
 		return null
 	}
 
-	const {data: film, isFetching} = useFilm.fetchFilmById(params.id)
+	const {data: films, isFetching} = useFilm.fetchAll()
+
+	const film = films?.find(f=>f.id == params.id)
 
 	if(isFetching){
-		return (<Spinner size={"l"}/>)
+		return (<LoadingPage/>)
 	}
 
 	if(film){

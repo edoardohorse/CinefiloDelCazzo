@@ -31,7 +31,7 @@ export class FilmController {
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;
 		// @ts-ignore
-		let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
+		let bufferThumbnail: Film["thumbnail"] | null = req.files?.thumbnail?.[0].buffer || null
 
 		if(body == undefined) {
 			log.error('Error creating film: body is empty');
@@ -52,14 +52,6 @@ export class FilmController {
 			});
 			return {res: false, data: null};
 		}
-
-/*		if(bufferThumbnail == null ) {
-			res.status(400).json({
-				error: 'Missing required fields: thumbnail'
-			});
-			log.error('Film CREATE: Missing required fields: thumbnail')
-			return {res: false, data: null};
-		}*/
 
 
 		if(body.type === undefined) {
@@ -87,6 +79,9 @@ export class FilmController {
 
 	validateEditFilmRequest(req: UpdateFilmRequestWithFiles, res: Response):  {res: boolean, data: Film | null}  {
 		const {body: film, files} = req;
+
+		let bufferThumbnail: Film["thumbnail"] | null = req.files?.thumbnail?.[0].buffer || null
+
 		// @ts-ignore
 		// let bufferThumbnail: Film["thumbnail"] | null = req.files.thumbnail[0].buffer || null
 
@@ -98,6 +93,13 @@ export class FilmController {
 
 		if(film.endDate == ""){
 			film.endDate = null
+		}
+
+		if(Object.keys(req.files).length == 0){
+			film.thumbnail = undefined;
+		}
+		else{
+			film.thumbnail = bufferThumbnail?.toString('base64')
 		}
 
 		return {res: true, data: film}
@@ -130,7 +132,7 @@ export class FilmController {
 			const filmsWithBase64 = films.map(film => ({
 				...film,
 				// @ts-ignore
-				thumbnail: `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}`
+				thumbnail: film?.thumbnail ? `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}` : null
 			}));
 
 			res.json(filmsWithBase64);

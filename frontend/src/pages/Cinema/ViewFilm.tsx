@@ -6,6 +6,7 @@ import {ChipLinks} from "@/components/Film/ChipLinks";
 import '@/css/film.css'
 import {snackbar} from "@/store/snackbar-store";
 import {FC} from "react";
+import {LoadingPage} from "@/pages/LoadingPage";
 
 
 
@@ -27,7 +28,7 @@ const ViewFilm:FC<{id?:string}> = ({id} :{ id?: string }) => {
 	const film = films?.find(f=>String(f.id) === id)
 
 	if (film == undefined) {
-		return (<Spinner size={"l"}/>)
+		return (<LoadingPage/>)
 	}
 
 	const handleDelete = async() => {

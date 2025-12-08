@@ -34,7 +34,7 @@ const CardFilm = ({film}: TCardFilmProps) => {
 		// showViewFilm(film.id)
 	}
 	return (
-		<Card type="ambient" key={film.id} onClick={onClickCard} style={{ cursor: "pointer", minWidth:"30vw" }}>
+		<Card type="ambient" key={film.id} className={'card-film'} onClick={onClickCard} style={{ cursor: "pointer", minWidth:"30vw" }}>
 			<Fragment>
 				<Card.Chip readOnly>{capitalize(film.type)}</Card.Chip>
 				<img

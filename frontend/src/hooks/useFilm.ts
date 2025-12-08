@@ -82,7 +82,6 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 		defaultValues: formInit
 	})
 
-
 	const reader = new FileReader();
 	const image = form.watch('thumbnail')
 
@@ -92,7 +91,12 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 
 	useEffect(function () {
 		if(image){
-			reader.readAsDataURL(image as File)
+			if(typeof image == "object"){
+				reader.readAsDataURL(image as File)
+			}
+			else{
+				setImageURI(image)
+			}
 		}
 	}, [image]);
 
@@ -130,9 +134,12 @@ export const useFormFilm = (formInit: CreateFilmFormData | UpdateFilmRequest = d
 			...data,
 		};
 
-		if (data.thumbnail) {
+		if (typeof data.thumbnail == 'object') {
 			// Convert File to Buffer if needed for your API
-			// updateFilmRequest.thumbnail = await data.thumbnail.arrayBuffer();
+			updateFilmRequest.thumbnail = await (data.thumbnail as File).arrayBuffer();
+		}
+		else{
+			delete updateFilmRequest.thumbnail;
 		}
 
 		if(updateFilmRequest.releaseDate){

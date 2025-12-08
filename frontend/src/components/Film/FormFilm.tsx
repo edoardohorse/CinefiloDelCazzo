@@ -35,16 +35,13 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 		removeThumbnail
 	} = useFormFilm(film, type);
 
-	const {watch, formState: {errors}, handleSubmit} = form
+	const {formState: {errors}, watch, handleSubmit} = form
 
-	const nFileUploaded = watch("thumbnail") == undefined ? 0 : 1;
 	let handleOnSubmit = handleCreateFilm
 
 	if(type == 'update') {
 		handleOnSubmit = handleUpdateFilm
 	}
-
-
 
 	return (
 		<List>
@@ -55,15 +52,13 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 				/>
 
 				{/*Anime*/}
-				<Cell Component="label" after={<Switch onChange={onSwitchAnime}/>}>
+				<Cell Component="label" after={<Switch checked={watch('type') == 'anime'} onChange={onSwitchAnime}/>}>
 					<Text>Anime? </Text>
 				</Cell>
 
 				{/*Data uscita*/}
 				<Controller name={"releaseDate"} control={form.control} render={(({field}) =>
-						<Input {...field} header="Data d'uscita" type="date"
-						       status={errors.releaseDate && "error"}
-						/>)}
+						<Input {...field} onChange={(e)=>field.onChange(e)} header="Data d'uscita" type="date" status={errors.releaseDate && "error"}/>)}
 				/>
 
 
@@ -80,15 +75,13 @@ const FormFilm = ({film, type}: { film: CreateFilmFormData | UpdateFilmRequest, 
 
 				{/*File*/}
 				<div style={{display: "flex", alignItems: "center"}}>
-
-					{type === 'create' &&
+					{type === 'create' || (imageURI == undefined && type == 'update') &&
             <FileInput label={"Thumbnail"} onChange={onUpload} className={"test"}/>
 					}
 					{errors.thumbnail && (
 						<Text style={{color: "red"}}>{errors.thumbnail.message}</Text>
 					)}
-					{imageURI && <PreviewImage uri={imageURI} onErase={removeThumbnail}/>
-					}
+					{imageURI && <PreviewImage uri={imageURI} onErase={removeThumbnail}/>}
 				</div>
 
 
