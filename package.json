@@ -6,7 +6,8 @@
     "build:types": "npm run build --workspace=types",
     "build:backend": "cp .env backend/.env && npm run build --workspace=backend",
     "build:frontend": "npm run build --workspace=frontend",
-    "build": "cp .env backend/.env && npm run build --workspaces",
+    "build": "npm run build --workspaces",
+    "copy_env": "cp .env backend/.env",
     "start:backend": "npm run start --workspace=@cinefilodelcazzo/backend",
     "start:frontend": "npm run dev --workspace=@cinefilodelcazzo/frontend",
     "start": "concurrently \"npm:start:backend\" \"npm:start:frontend\""

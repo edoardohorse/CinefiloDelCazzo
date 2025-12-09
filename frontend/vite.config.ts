@@ -36,6 +36,6 @@ export default defineConfig({
     // Exposes your dev server and makes it accessible for the devices in the same network.
 	  port: process.env.PORT || 10000,
 	  host: '0.0.0.0', // Important for Render
-	  allowedHosts: ['cinefilodelcazzo.onrender.com']
+	  allowedHosts: ['cinefilodelcazzo.onrender.com','cinefilodelcazzo.netlify.app']
   },
 });
