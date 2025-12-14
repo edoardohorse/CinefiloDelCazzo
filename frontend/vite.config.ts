@@ -36,7 +36,15 @@ export default defineConfig(({command, mode}) => {
 			target: 'esnext',
 			minify: 'terser',
 			outDir: 'dist',
-			sourcemap: false
+			sourcemap: false,
+			assetsDir: 'assets',
+			rollupOptions: {
+				output: {
+					assetFileNames: 'assets/[name]-[hash][extname]',
+					chunkFileNames: 'assets/[name]-[hash].js',
+					entryFileNames: 'assets/[name]-[hash].js'
+				}
+			}
 		},
 		publicDir: './public',
 		server: {
