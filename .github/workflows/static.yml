@@ -7,49 +7,57 @@ on:
     branches: [ master ]
 
 env:
-  NODE_VERSION: '24'  # or your preferred Node.js version
+  NODE_VERSION: '24'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm i  # Use npm ci for clean install
-    
-    - name: Build project
-      run: npm run build  # This creates the dist/ folder
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: dist-folder
-        path: frontend/dist/
-        retention-days: 7
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci  # Changed from 'npm i' for consistency
+
+      - name: Build project
+        run: npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-folder
+          path: dist/  # Changed from 'frontend/dist/'
+          retention-days: 7
+
   deploy:
+    needs: build  # Added: This job depends on build job
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-folder
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: 'frontend/dist'
+          # Upload the downloaded dist folder
+          path: '.'  # Current directory where artifact was downloaded
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
