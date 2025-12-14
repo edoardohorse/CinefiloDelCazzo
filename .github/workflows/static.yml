@@ -24,7 +24,7 @@ jobs:
         cache: 'npm'
     
     - name: Install dependencies
-      run: npm ci  # Use npm ci for clean install
+      run: npm i  # Use npm ci for clean install
     
     - name: Build project
       run: npm run build:frontend  # This creates the dist/ folder
