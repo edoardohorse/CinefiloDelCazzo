@@ -27,7 +27,7 @@ jobs:
       run: npm i  # Use npm ci for clean install
     
     - name: Build project
-      run: npm run build:frontend  # This creates the dist/ folder
+      run: npm run build  # This creates the dist/ folder
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
