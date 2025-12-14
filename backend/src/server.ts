@@ -11,9 +11,10 @@ import {log} from "./utils.js";
 // Configure multer
 const upload = multer();
 
-
 const app = express();
-const port = 10000;
+const PORT = process.env.PORT || 10000;
+const DOMAIN = process.env.VITE_DOMAIN;
+const BASE_URL = process.env.VITE_BASE_API || ""
 
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -30,11 +31,19 @@ app.use((req, res, next) => {
 	next();
 });
 
+
+
+if(BASE_URL == '') {
+	log.error('BASE_URL environment variable not set. Exiting...');
+	process.exit(1);
+}
+
 // Swagger UI
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(`/${BASE_URL}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Initialize controller
-const filmController = new FilmController();
+const filmController = new FilmController(BASE_URL);
+const endpoints = filmController.endpoints();
 
 // app.use(express.static(path.join(dirFrontend, 'dist')));
 
@@ -56,7 +65,7 @@ const filmController = new FilmController();
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.get('/api/films', filmController.getFilms);
+app.get(endpoints.getFilms, filmController.getFilms);
 
 /**
  * @swagger
@@ -91,7 +100,7 @@ app.get('/api/films', filmController.getFilms);
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.get('/api/films/:id', filmController.getFilmById);
+app.get(endpoints.getFilmById, filmController.getFilmById);
 
 /**
  * @swagger
@@ -125,7 +134,7 @@ app.get('/api/films/:id', filmController.getFilmById);
  *         $ref: '#/components/responses/ServerError'
  */
 // @ts-ignore
-app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.createFilm);
+app.post(endpoints.createFilm, upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.createFilm);
 
 /**
  * @swagger
@@ -161,7 +170,7 @@ app.post('/api/films', upload.fields([{name:"thumbnail", maxCount:1}]) , filmCon
  *         $ref: '#/components/responses/ServerError'
  */
 // @ts-ignore
-app.put('/api/films/:id', upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.updateFilm);
+app.put(endpoints.updateFilm, upload.fields([{name:"thumbnail", maxCount:1}]) , filmController.updateFilm);
 
 /**
  * @swagger
@@ -196,7 +205,7 @@ app.put('/api/films/:id', upload.fields([{name:"thumbnail", maxCount:1}]) , film
  *       500:
  *         $ref: '#/components/responses/ServerError'
  */
-app.delete('/api/films/:id', filmController.deleteFilm);
+app.delete(endpoints.deleteFilm, filmController.deleteFilm);
 
 /**
  * @swagger
@@ -220,7 +229,7 @@ app.delete('/api/films/:id', filmController.deleteFilm);
  *                   format: date-time
  *                   example: 2023-01-01T00:00:00.000Z
  */
-app.get('/api/health', async (req, res) => {
+app.get(endpoints.health, async (req, res) => {
 	const result = { status: 'OK', timestamp: new Date().toISOString() }
 	await filmController.checkConnection()
 
@@ -243,9 +252,9 @@ app.use((error: any, req: express.Request, res: express.Response, next: express.
 	res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(port, () => {
-	log.info(`Server running on http://localhost:${port}`);
-	log.info(`Swagger documentation available at http://localhost:${port}/api/docs`);
+app.listen(PORT, () => {
+	log.info(`Server running on http://localhost:${PORT} → https://${DOMAIN}${endpoints.health}`);
+	log.info(`Swagger documentation available at http://localhost:${PORT}/docs → https://${DOMAIN}/${BASE_URL}/docs`);
 });
 
 // Graceful shutdown

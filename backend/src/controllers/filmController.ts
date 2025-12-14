@@ -22,12 +22,25 @@ interface UpdateFilmRequestWithFiles extends Request {
 	};
 }
 
+export const FILM_ENDPOINTS = (BASE_URL:string)=>({
+	getFilms:`/${BASE_URL}/films`,
+	getFilmById:`/${BASE_URL}/films/:id`,
+	createFilm:`/${BASE_URL}/films`,
+	updateFilm:`/${BASE_URL}/films/:id`,
+	deleteFilm:`/${BASE_URL}/films/:id`,
+	health:`/${BASE_URL}/health`,
+})
+
 export class FilmController {
 	private dbService: DatabaseService;
+	private _endpoints;
 
-	constructor() {
+	constructor(baseUrl: string) {
 		this.dbService = new DatabaseService();
+		this._endpoints = FILM_ENDPOINTS(baseUrl)
 	}
+
+	endpoints(){return this._endpoints}
 
 	validateCreateFilmRequest(req: CreateFilmRequestWithFiles, res: Response): {res: boolean, data: Film | null} {
 		const {body, files} = req;

@@ -1,12 +1,11 @@
 import axios from "axios";
 
-// const PORT = '10000'
-const BASE_DOMAIN = '204.216.220.56'
-const BASE_URL = `${BASE_DOMAIN}/api`;
-
+const BASE_API = import.meta.env.VITE_BASE_API;
+const DOMAIN = import.meta.env.VITE_DOMAIN
+const API_URL = `https://${DOMAIN}/${BASE_API}`;
 
 const api = axios.create({
-	baseURL: BASE_URL,
+	baseURL: API_URL,
 	headers: {
 		'Content-Type': 'application/json',
 	},

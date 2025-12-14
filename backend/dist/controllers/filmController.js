@@ -3,11 +3,22 @@ import { log } from "../utils.js";
 const SUCCESS_CREATE_FILM = 'Film created successfully';
 const SUCCESS_UPDATE_FILM = 'Film updated successfully';
 const SUCCESS_DELETE_FILM = 'Film deleted successfully';
+export const FILM_ENDPOINTS = (BASE_URL) => ({
+    getFilms: `/${BASE_URL}/films`,
+    getFilmById: `/${BASE_URL}/films/:id`,
+    createFilm: `/${BASE_URL}/films`,
+    updateFilm: `/${BASE_URL}/films/:id`,
+    deleteFilm: `/${BASE_URL}/films/:id`,
+    health: `/${BASE_URL}/health`,
+});
 export class FilmController {
     dbService;
-    constructor() {
+    _endpoints;
+    constructor(baseUrl) {
         this.dbService = new DatabaseService();
+        this._endpoints = FILM_ENDPOINTS(baseUrl);
     }
+    endpoints() { return this._endpoints; }
     validateCreateFilmRequest(req, res) {
         const { body, files } = req;
         // @ts-ignore
@@ -115,6 +126,7 @@ export class FilmController {
             }
             const film = await this.dbService.getFilmById(id);
             if (!film) {
+                log.error(`Film not found`);
                 res.status(404).json({ error: 'Film not found' });
                 return;
             }
@@ -124,6 +136,7 @@ export class FilmController {
                 // @ts-ignore
                 thumbnail: `data:image/png;base64,${film?.thumbnail?.toString('base64')}`
             };
+            log.success(`Film fetched: ${filmWithBase64.id}`);
             res.json(filmWithBase64);
         }
         catch (error) {
