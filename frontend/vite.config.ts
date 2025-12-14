@@ -12,7 +12,9 @@ export default defineConfig(({command, mode}) => {
 		define: {
 			__APP_ENV__: JSON.stringify(env.APP_ENV)
 		},
-		base: '/',
+		base: process.env.NODE_ENV === 'production'
+			? '/CinefiloDelCazzo/'
+			: '/',
 		css: {
 			preprocessorOptions: {
 				scss: {
