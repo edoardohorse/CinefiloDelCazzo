@@ -1,3 +1,7 @@
+import path from "path";
+// Serve static files from Vite build
+import { fileURLToPath } from 'url';
+
 type LogLevel = 'info' | 'warn' | 'error' | 'success';
 
 const colors = {
@@ -55,4 +59,17 @@ export const log = {
 	success: (message: string)=>logPrint(message, 'success'),
 	error: (message: string)=>logPrint(message, 'error'),
 	warn: (message: string)=>logPrint(message, 'warn'),
+}
+
+
+
+
+function getDirFrontend(){
+
+	// ES modules __dirname equivalent
+	const __filename = fileURLToPath(import.meta.url);
+	const __dirname = path.dirname(__filename);
+	const dirnameSplit = __dirname.split('/')
+	const dirname = dirnameSplit.slice(0,dirnameSplit.length-2).join('/')
+	return `${dirname}/frontend`
 }

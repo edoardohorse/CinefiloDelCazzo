@@ -62,4 +62,25 @@ export class DatabaseService {
 	deleteFilm(id: number){
 		return libPrisma.film.delete({where: {id: id}})
 	}
+
+	async checkConnection(): Promise<boolean>{
+		let check : boolean = true
+		try {
+			// Method 1: Raw query
+			await libPrisma.$queryRaw`SELECT 1`
+			log.success('Database connection successful')
+
+			// Method 2: Using $connect (implicitly happens on first query)
+			await libPrisma.$connect()
+			log.success('Connected to database')
+
+		} catch (error) {
+			log.error(`Database connection failed: ${error}`)
+			check = false
+		} finally {
+			await libPrisma.$disconnect()
+		}
+
+		return new Promise(resolve=>{resolve(check)})
+	}
 }

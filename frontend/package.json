@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@cinefilodelcazzo/types": "../types",
+    "@esbuild/linux-x64": "0.27.0",
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.90.5",
     "@telegram-apps/telegram-ui": "^2.1.9",

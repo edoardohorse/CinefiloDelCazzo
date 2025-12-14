@@ -16,12 +16,8 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: 'http://localhost:3000',
+                url: 'https://204.216.220.56',
                 description: 'Development server'
-            },
-            {
-                url: 'https://api.yourdomain.com',
-                description: 'Production server'
             }
         ],
         components: {

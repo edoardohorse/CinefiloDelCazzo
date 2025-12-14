@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import multer from 'multer';
 import { FilmController } from "./controllers/filmController.js";
 import swaggerOptions from "./config/swagger.js";
-import path from 'path';
 import { log } from "./utils.js";
 // Configure multer
 const upload = multer();
@@ -24,21 +23,13 @@ app.use((req, res, next) => {
     next();
 });
 // Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Initialize controller
 const filmController = new FilmController();
-// Serve static files from Vite build
-import { fileURLToPath } from 'url';
-// ES modules __dirname equivalent
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dirnameSplit = __dirname.split('/');
-const dirname = dirnameSplit.slice(0, dirnameSplit.length - 2).join('/');
-const dirFrontend = `${dirname}/frontend`;
-app.use(express.static(path.join(dirFrontend, 'dist')));
+// app.use(express.static(path.join(dirFrontend, 'dist')));
 /**
  * @swagger
- * /api/films:
+ * /cinefilo/films:
  *   get:
  *     summary: Get all films
  *     tags: [Films]
@@ -57,7 +48,7 @@ app.use(express.static(path.join(dirFrontend, 'dist')));
 app.get('/api/films', filmController.getFilms);
 /**
  * @swagger
- * /api/films/{id}:
+ * /cinefilo/films/{id}:
  *   get:
  *     summary: Get a film by ID
  *     tags: [Films]
@@ -91,7 +82,7 @@ app.get('/api/films', filmController.getFilms);
 app.get('/api/films/:id', filmController.getFilmById);
 /**
  * @swagger
- * /api/films:
+ * /cinefilo/films:
  *   post:
  *     summary: Create a new film
  *     tags: [Films]
@@ -124,7 +115,7 @@ app.get('/api/films/:id', filmController.getFilmById);
 app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.createFilm);
 /**
  * @swagger
- * /api/films/{id}:
+ * /cinefilo/films/{id}:
  *   put:
  *     summary: Update a film
  *     tags: [Films]
@@ -159,7 +150,7 @@ app.post('/api/films', upload.fields([{ name: "thumbnail", maxCount: 1 }]), film
 app.put('/api/films/:id', upload.fields([{ name: "thumbnail", maxCount: 1 }]), filmController.updateFilm);
 /**
  * @swagger
- * /api/films/{id}:
+ * /cinefilo/films/{id}:
  *   delete:
  *     summary: Delete a film
  *     tags: [Films]
@@ -193,7 +184,7 @@ app.put('/api/films/:id', upload.fields([{ name: "thumbnail", maxCount: 1 }]), f
 app.delete('/api/films/:id', filmController.deleteFilm);
 /**
  * @swagger
- * /health:
+ * /cinefilo/health:
  *   get:
  *     summary: Health check
  *     tags: [Health]
@@ -213,31 +204,26 @@ app.delete('/api/films/:id', filmController.deleteFilm);
  *                   format: date-time
  *                   example: 2023-01-01T00:00:00.000Z
  */
-app.get('/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
     const result = { status: 'OK', timestamp: new Date().toISOString() };
+    await filmController.checkConnection();
     res.json(result);
     log.success(`Status: ${result.status} - ${result.timestamp}`);
 });
-/**
- * @swagger
- * /api-docs:
- *   get:
- *     summary: Swagger API Documentation
- *     description: Interactive API documentation
- *     tags: [Documentation]
- */
 // Fallback to index.html for SPA routing
 app.get('*', (req, res) => {
-    res.sendFile(path.join(dirFrontend, 'dist', 'index.html'));
+    log.info(`Request for ${req.originalUrl} received`);
+    res.status(404);
+    // res.sendFile(path.join(dirFrontend, 'dist', 'index.html'));
 });
 // Error handler
 app.use((error, req, res, next) => {
-    console.error('Unhandled error:', error);
+    log.error(`Unhandled error: ${error}`);
     res.status(500).json({ error: 'Internal server error' });
 });
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
-    console.log(`Swagger documentation available at http://localhost:${port}/api-docs`);
+    log.info(`Server running on http://localhost:${port}`);
+    log.info(`Swagger documentation available at http://localhost:${port}/api/docs`);
 });
 // Graceful shutdown
 process.on('SIGINT', () => {

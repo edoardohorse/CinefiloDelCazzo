@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // const PORT = '10000'
-const BASE_URL = `/api`;
+const BASE_DOMAIN = '204.216.220.56'
+const BASE_URL = `${BASE_DOMAIN}/api`;
 
 
 const api = axios.create({

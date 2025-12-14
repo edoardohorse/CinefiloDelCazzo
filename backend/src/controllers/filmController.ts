@@ -2,6 +2,7 @@ import type { Request, Response } from 'express';
 import { DatabaseService } from '../services/database.js';
 import {CreateFilmRequest, Film, IResult, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 import {log} from "../utils.js";
+import {libPrisma} from "../lib/libPrisma";
 
 const SUCCESS_CREATE_FILM = 'Film created successfully'
 const SUCCESS_UPDATE_FILM = 'Film updated successfully'
@@ -137,6 +138,7 @@ export class FilmController {
 				thumbnail: film?.thumbnail ? `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}` : null
 			}));
 
+			log.success(`Films fetched: ${filmsWithBase64.length}`);
 			res.json(filmsWithBase64);
 		} catch (error) {
 			log.error(`Error fetching films: ${error}`);
@@ -157,6 +159,7 @@ export class FilmController {
 			const film = await this.dbService.getFilmById(id);
 
 			if (!film) {
+				log.error(`Film not found`);
 				res.status(404).json({ error: 'Film not found' });
 				return;
 			}
@@ -168,6 +171,7 @@ export class FilmController {
 				thumbnail: `data:image/png;base64,${(film?.thumbnail as Blob)?.toString('base64')}`
 			};
 
+			log.success(`Film fetched: ${filmWithBase64.id}`);
 			res.json(filmWithBase64);
 		} catch (error) {
 			log.error(`Error fetching film: ${error}`);
@@ -227,4 +231,8 @@ export class FilmController {
 			res.status(500).json({ error: 'Internal server error' });
 		}
 	};
+
+	checkConnection = async (): Promise<boolean> => {
+		return await this.dbService.checkConnection()
+	}
 }

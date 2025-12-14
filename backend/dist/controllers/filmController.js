@@ -97,6 +97,7 @@ export class FilmController {
                 // @ts-ignore
                 thumbnail: film?.thumbnail ? `data:image/png;base64,${film?.thumbnail?.toString('base64')}` : null
             }));
+            log.success(`Films fetched: ${filmsWithBase64.length}`);
             res.json(filmsWithBase64);
         }
         catch (error) {
@@ -173,5 +174,8 @@ export class FilmController {
             log.error(`Error deleting film: ${error}`);
             res.status(500).json({ error: 'Internal server error' });
         }
+    };
+    checkConnection = async () => {
+        return await this.dbService.checkConnection();
     };
 }
