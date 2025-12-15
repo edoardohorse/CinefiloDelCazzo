@@ -17,7 +17,7 @@ export function App() {
 			// platform={['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'}
 			platform={'base'}
 		>
-			<BrowserRouter>
+			<BrowserRouter basename={"/CinefiloDelCazzo"}>
 				<Routes>
 					{routes.map((route) => <Route key={route.path} path={route.path} element={<WrapperPage route={route}/>}  />)}
 					<Route path="*" element={<Navigate to="/list"/>}/>
