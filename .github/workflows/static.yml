@@ -29,7 +29,12 @@ jobs:
         env:
           VITE_BASE_API: ${{ vars.VITE_BASE_API }}
           VITE_DOMAIN: ${{ vars.VITE_DOMAIN }}
-        run: npm run build
+        run: |
+          # Create a .env file during build
+          echo "VITE_BASE_API=$VITE_BASE_API" >> .env
+          echo "VITE_DOMAIN=$VITE_DOMAIN" >> .env
+          # Run your build command
+          npm run build
 
       - name: Upload frontend artifacts
         uses: actions/upload-artifact@v4
