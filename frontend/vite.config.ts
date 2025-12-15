@@ -7,6 +7,11 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig(({command, mode}) => {
 
 	const env = loadEnv(mode, process.cwd(), '')
+	//<editor-fold desc="vite.config.ts >  - line 10 at 15/12/2025 01:01:03">
+	console.group('vite.config.ts > envs - line 10 at 15/12/2025 01:01:03');
+	console.debug(env);
+	console.groupEnd();
+	//</editor-fold>
 
 	return {
 		define: {

@@ -26,6 +26,9 @@ jobs:
         run: npm ci
 
       - name: Build frontend
+        env:
+          VITE_BASE_API: ${{ vars.VITE_BASE_API }}
+          VITE_DOMAIN: ${{ vars.VITE_DOMAIN }}
         run: npm run build
 
       - name: Upload frontend artifacts
