@@ -20,7 +20,7 @@ export function App() {
 			<BrowserRouter basename={"/CinefiloDelCazzo"}>
 				<Routes>
 					{routes.map((route) => <Route key={route.path} path={route.path} element={<WrapperPage route={route}/>}  />)}
-					<Route path="*" element={<Navigate to="/CinefiloDelCazzo"/>}/>
+					<Route path="*" element={<Navigate to="/list"/>}/>
 				</Routes>
 				{snackbarInfo?.show && <Snackbar
 
