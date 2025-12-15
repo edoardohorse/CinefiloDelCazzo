@@ -6,6 +6,8 @@ on:
 
 env:
   NODE_VERSION: '24'
+  VITE_BASE_API: ${{ vars.VITE_BASE_API }}
+  VITE_DOMAIN: ${{ vars.VITE_DOMAIN }}
 
 jobs:
   build:
@@ -26,13 +28,11 @@ jobs:
         run: npm ci
 
       - name: Build frontend
-        env:
-          VITE_BASE_API: ${{ vars.VITE_BASE_API }}
-          VITE_DOMAIN: ${{ vars.VITE_DOMAIN }}
         run: |
           # Create a .env file during build
           echo "VITE_BASE_API=$VITE_BASE_API" >> .env
           echo "VITE_DOMAIN=$VITE_DOMAIN" >> .env
+          cat .env
           # Run your build command
           npm run build
 
