@@ -6,8 +6,8 @@ on:
 
 env:
   NODE_VERSION: '24'
-  VITE_BASE_API: ${{ vars.VITE_BASE_API }}
-  VITE_DOMAIN: ${{ vars.VITE_DOMAIN }}
+  VITE_BASE_API: "cinefilo"
+  VITE_DOMAIN: "204.216.220.56"
 
 jobs:
   build:
