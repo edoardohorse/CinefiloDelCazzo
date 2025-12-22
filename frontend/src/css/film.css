@@ -21,7 +21,7 @@ div[role="dialog"] .vaul-scrollable {
 }
 
 .film {
-    height: 95vh;
+    height: 90vh;
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -92,6 +92,7 @@ div[role="dialog"] .vaul-scrollable {
 .film-title{
     font-weight: 700;
     overflow: hidden;
+    word-break: break-word;
 }
 
 .film-subtitle{

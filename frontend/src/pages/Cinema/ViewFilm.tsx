@@ -8,12 +8,13 @@ import {snackbar} from "@/store/snackbar-store";
 import {FC} from "react";
 import {LoadingPage} from "@/pages/LoadingPage";
 import {FilmImage} from "@/components/Film/FilmImage";
+import {useSelectFilm} from "@/hooks/useSelectFilm";
 
 
 const ViewFilm: FC<{ id?: string }> = ({id}: { id?: string }) => {
 
     const navigate = useNavigate();
-
+    const handlers = useSelectFilm(id)
     if (id == undefined) {
         return null
     }
@@ -46,7 +47,7 @@ const ViewFilm: FC<{ id?: string }> = ({id}: { id?: string }) => {
     }
 
     return (
-        <div className="film">
+        <div className="film" {...handlers}>
             <FilmImage src={film.thumbnail} blured={true} className="film-thumbnail"
                        classNameBg="film-thumbnail-background"/>
             <div className={'film-header'}>
