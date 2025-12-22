@@ -1,83 +1,164 @@
+div[role="dialog"] {
+
+}
+
+div[role="dialog"]:has(.film) header {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+div[role="dialog"]:has(.film) header:before {
+    box-shadow: 0px 0px 4px -1px black;
+    border: 1px solid #00000061;
+    background: rgb(255 255 255);
+}
+
+div[role="dialog"] .vaul-scrollable {
+    position: relative;
+    z-index: 5;
+    overflow-x: hidden;
+}
+
 .film {
-  height: 100%;
-  box-sizing: border-box;
+    height: 95vh;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .film-info-wrapper {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  background: white;
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    background: white;
 }
 
+
+
 .film-info {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  align-items: flex-start;
-  box-sizing: border-box;
-  justify-content: space-between;
-  padding: 1rem;
-  gap: 1rem;
-  background-color: rgba(255, 255, 255, 0.3);
-  width: 100%;
-  height: 100%;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    align-items: flex-start;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 4px;
 }
 
 .film-info-body {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 1em;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1em;
 }
 
 .film-info-actions {
-  display: flex;
-  gap: 1em;
-  width: 100%;
-  justify-content: end;
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.film-header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    width: 100%;
+    padding: 1em;
+    background: linear-gradient(0, transparent 0, var(--tgui--black) 150%);
+    z-index: 15;
+    top: 0;
+    position: absolute;
+    min-height: 80px;
+    color: white;
+    text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+}
+
+.film-title-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.film-title{
+    font-weight: 700;
+    overflow: hidden;
+}
+
+.film-subtitle{
 }
 
 .film-thumbnail {
-  width: 100%;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 10;
+}
+
+.film-thumbnail-background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    filter: blur(35px);
+    z-index: 5;
+}
+
+.film-actions{
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    z-index: 10;
+    width: 100%;
+    padding: 1em;
+    box-sizing: border-box;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0, var(--tgui--black) 150%);
+}
+
+.film-chips{
+    flex: 1;
 }
 
 .chip-links {
-  display: flex;
-  gap: 1em;
+    display: flex;
+    gap: 1em;
 }
 
 .chip-links > div {
-  border: 1px solid rgba(60, 64, 67, 0.3);
+    border: 1px solid rgba(60, 64, 67, 0.3);
 }
 
 .btn-erase {
-  background-color: rgba(229, 57, 53, 0.2);
-  color: var(--tgui--destructive_text_color);
+    background-color: rgba(229, 57, 53, 0.2);
+    color: var(--tgui--destructive_text_color);
 }
 
-.card-film{
-  cursor: pointer;
+.card-film {
+    cursor: pointer;
 }
 
-.card-film-cell:hover{
-  background: linear-gradient(180deg, transparent 0, var(--tgui--black) 100%);
+.card-film-cell:hover {
+    background: linear-gradient(180deg, transparent 0, var(--tgui--black) 100%);
 }
 
-.card-film-cell{
-  text-shadow: 1px 1px 10px black;
+.card-film-cell {
+    text-shadow: 1px 1px 10px black;
 }
 
-@media (max-width< 600px) {
-  .film {
-    padding: 0;
-  }
+@media (max-width < 600px) {
+    .film {
+        padding: 0;
+    }
 
 }
 
