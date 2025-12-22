@@ -1,4 +1,4 @@
-import {Navigate, Route, Routes, BrowserRouter} from 'react-router-dom';
+import {Navigate, Route, Routes, HashRouter} from 'react-router-dom';
 import {useSignal, miniApp} from '@tma.js/sdk-react';
 import {AppRoot, Snackbar} from '@telegram-apps/telegram-ui';
 import packageJson from '../../package.json'
@@ -17,11 +17,11 @@ export function App() {
             // platform={['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'}
             platform={'base'}
         >
-            <BrowserRouter basename={"/CinefiloDelCazzo"}>
+            <HashRouter>
                 <Routes>
-                    {routes.map((route) => <Route key={route.path} path={route.path}
-                                                  element={<WrapperPage route={route}/>}/>)}
-                    <Route path="*" element={<Navigate to="/list"/>}/>
+                    {routes.map((route) =>
+                        <Route key={route.path} path={route.path} element={<WrapperPage route={route}/>}/>)}
+                    <Route path="*" element={<Navigate to="/list" replace/>}/>
                 </Routes>
                 {snackbarInfo?.show && <Snackbar
                     duration={snackbarInfo?.duration}
@@ -30,7 +30,7 @@ export function App() {
                         snackbarQueue.set({show: false})
                     }}>{snackbarInfo.title}</Snackbar>}
                 <span className={'version'}>{packageJson.version}</span>
-            </BrowserRouter>
+            </HashRouter>
         </AppRoot>
     );
 }
