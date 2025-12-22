@@ -4,6 +4,20 @@ body {
   margin: 0;
 }
 
+.version:before{
+  content: "v";
+}
+
+.version{
+  position: fixed;
+  bottom: 1em;
+  left: 1em;
+  color: var(--tgui--text_color);
+  font-family: var(--tgui--font-family);
+  z-index: 1;
+  pointer-events: none;
+}
+
 .list-wrapper{
   display: flex;
   flex-direction: row;
