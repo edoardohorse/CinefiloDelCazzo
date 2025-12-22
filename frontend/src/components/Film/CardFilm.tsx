@@ -1,4 +1,4 @@
-import {Film} from "../../../../types";
+	import {Film} from "../../../../types";
 import {capitalize, dateFormatted} from "@/utils/stringFormatter";
 import {Card} from "@telegram-apps/telegram-ui";
 import {Fragment} from "react";
@@ -16,7 +16,7 @@ const CardDate = ({film}: TCardFilmProps) => {
 
 	if (film.endDate) {
 		return (
-			<p>{dateFormatted(film.releaseDate)} - {dateFormatted(film.releaseDate)}</p>
+			<p>{dateFormatted(film.releaseDate)} - {dateFormatted(film.endDate)}</p>
 		)
 	}
 
