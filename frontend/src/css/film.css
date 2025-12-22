@@ -62,8 +62,16 @@
   color: var(--tgui--destructive_text_color);
 }
 
-.card-film div:hover{
+.card-film{
+  cursor: pointer;
+}
+
+.card-film-cell:hover{
   background: linear-gradient(180deg, transparent 0, var(--tgui--black) 100%);
+}
+
+.card-film-cell{
+  text-shadow: 1px 1px 10px black;
 }
 
 @media (max-width< 600px) {
