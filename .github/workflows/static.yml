@@ -7,7 +7,7 @@ on:
 env:
   NODE_VERSION: '24'
   VITE_BASE_API: "cinefilo"
-  VITE_DOMAIN: "204.216.220.56"
+  VITE_DOMAIN: "edoardohorse.ovh"
 
 jobs:
   build:
