@@ -1,7 +1,6 @@
-import {Film} from "@cinefilodelcazzo/types";
+import {Film, TFilter} from "@cinefilodelcazzo/types";
 import {log} from "../utils.js";
 import {libPrisma} from "../lib/libPrisma.js";
-
 
 export class DatabaseService {
 
@@ -29,8 +28,12 @@ export class DatabaseService {
 
 	}
 
-	getFilms() {
-		return libPrisma.film.findMany()
+	getFilms( sortOptions : TFilter) {
+		return libPrisma.film.findMany({
+			orderBy: {
+				[sortOptions.sortedBy]: sortOptions.order
+			}
+		})
 			/*.then(films => {
 				log.success(`Films fetched: ${films.length}`)
 			}).catch(err => log.error(`Error fetching films: ${err.message}`))*/

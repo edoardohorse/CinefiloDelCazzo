@@ -18,6 +18,7 @@ const BASE_URL = process.env.VITE_BASE_API || ""
 
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
+import packageJson from '../package.json'  with { type: 'json' };
 
 // Middleware
 app.use(bodyParser.json({ limit: '20mb' }));
@@ -53,6 +54,21 @@ const endpoints = filmController.endpoints();
  *   get:
  *     summary: Get all films
  *     tags: [Films]
+ *     parameters:
+ *        - in: query
+ *          name: sortedBy
+ *          schema:
+ *            type: string
+ *            enum: [releaseDate, createdAt]
+ *            default: title
+ *          description: Field to sort films by
+ *        - in: query
+ *          name: order
+ *          schema:
+ *            type: string
+ *            enum: [asc, desc]
+ *            default: asc
+ *          description: Sort order (ascending or descending)
  *     responses:
  *       200:
  *         description: List of all films
@@ -230,11 +246,11 @@ app.delete(endpoints.deleteFilm, filmController.deleteFilm);
  *                   example: 2023-01-01T00:00:00.000Z
  */
 app.get(endpoints.health, async (req, res) => {
-	const result = { status: 'OK', timestamp: new Date().toISOString() }
+	const result = { status: 'OK', timestamp: new Date().toISOString(), version: packageJson.version }
 	await filmController.checkConnection()
 
 	res.json(result);
-	log.success(`Status: ${result.status} - ${result.timestamp}`);
+	log.success(`Status: ${result.status} - ${result.timestamp} - ${packageJson.version}`);
 });
 
 

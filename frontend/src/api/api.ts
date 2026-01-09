@@ -1,7 +1,7 @@
 
 import api from "@/config/axios";
 import {CreateFilmFormData} from "@/schema/zod";
-import {Film, UpdateFilmRequest} from "@cinefilodelcazzo/types";
+import {Film, TFilter, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 
 export const BASE_URL = 'films';
 export const QUERY_FN_FETCH_FILM = `/${BASE_URL}`;
@@ -10,8 +10,12 @@ export const QUERY_FN_DELETE_FILM_BY_ID = (id:string)=>`/${BASE_URL}/${id}`
 export const QUERY_FN_UPDATE_FILM_BY_ID = (id:string)=>`/${BASE_URL}/${id}`
 
 
-export async function fetchAllFilm(){
-	const {data} = await api.get(QUERY_FN_FETCH_FILM);
+export async function fetchAllFilm(sortedOptions?: TFilter){
+	const {data} = await api.get(QUERY_FN_FETCH_FILM, {
+		params: {
+			...sortedOptions
+		}
+	});
 	return data;
 }
 

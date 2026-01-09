@@ -101,7 +101,11 @@ export class FilmController {
     // Get all films
     getFilms = async (req, res) => {
         try {
-            const films = await this.dbService.getFilms();
+            const sortedOptions = {
+                sortedBy: req.query.sortedBy,
+                order: req.query.order
+            };
+            const films = await this.dbService.getFilms(sortedOptions);
             // Convert thumbnail buffer to base64 for JSON response
             const filmsWithBase64 = films.map(film => ({
                 ...film,

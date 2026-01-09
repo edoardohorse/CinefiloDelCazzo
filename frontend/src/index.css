@@ -18,6 +18,22 @@ body {
   pointer-events: none;
 }
 
+.list-filter{
+  display: flex;
+  align-items: center;
+  padding: 0.2em;
+}
+
+.list-filter > div{
+  flex: 1;
+  max-width: 300px;
+}
+
+.list-filter-btn{
+  display: flex;
+  align-items: center;
+}
+
 .list-wrapper{
   display: flex;
   flex-direction: row;

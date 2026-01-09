@@ -22,8 +22,12 @@ export class DatabaseService {
         log.error(`Error creating film: ${err.message}`);
     })*/
     }
-    getFilms() {
-        return libPrisma.film.findMany();
+    getFilms(sortOptions) {
+        return libPrisma.film.findMany({
+            orderBy: {
+                [sortOptions.sortedBy]: sortOptions.order
+            }
+        });
         /*.then(films => {
             log.success(`Films fetched: ${films.length}`)
         }).catch(err => log.error(`Error fetching films: ${err.message}`))*/

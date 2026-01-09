@@ -12,16 +12,16 @@ import {useForm} from "react-hook-form";
 import {CreateFilmFormData, createFilmSchema, updateFilmSchema} from "@/schema/zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ChangeEvent, useEffect, useState} from "react";
-import {Film, FilmType, IResult, UpdateFilmRequest} from "@cinefilodelcazzo/types";
+import {Film, FilmType, IResult, TFilter, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 import {queryClient} from "@/components/Root";
 import {snackbar} from "@/store/snackbar-store";
 import {useNavigate} from "react-router-dom";
 
 export const useFilm = {
-	fetchAll: () => {
+	fetchAll: (sortedOptions?: TFilter) => {
 		return useQuery<Film[]>({
-			queryKey: [QUERY_FN_FETCH_FILM],
-			queryFn: () => fetchAllFilm(),
+			queryKey: [QUERY_FN_FETCH_FILM, sortedOptions?.sortedBy, sortedOptions?.order],
+			queryFn: () => fetchAllFilm(sortedOptions),
 			staleTime: Infinity
 		})
 	},

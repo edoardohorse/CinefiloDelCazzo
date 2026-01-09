@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { DatabaseService } from '../services/database.js';
-import {CreateFilmRequest, Film, IResult, UpdateFilmRequest} from "@cinefilodelcazzo/types";
+import {CreateFilmRequest, Film, IResult, TFilter, TKeyFilter, UpdateFilmRequest} from "@cinefilodelcazzo/types";
 import {log} from "../utils.js";
 import {libPrisma} from "../lib/libPrisma";
 
@@ -142,7 +142,11 @@ export class FilmController {
 	// Get all films
 	getFilms = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const films = await this.dbService.getFilms();
+			const sortedOptions: TFilter = {
+				sortedBy : req.query.sortedBy as TKeyFilter,
+				order : req.query.order as TFilter['order']
+			}
+			const films = await this.dbService.getFilms(sortedOptions);
 
 			// Convert thumbnail buffer to base64 for JSON response
 			const filmsWithBase64 = films.map(film => ({

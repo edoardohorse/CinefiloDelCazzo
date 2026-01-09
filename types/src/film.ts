@@ -3,7 +3,7 @@ export enum FilmType{
 	ANIME="anime"
 };
 
-export interface Film {
+export type Film ={
 	id?: number;
 	name: string;
 	thumbnail?: string ;
@@ -13,6 +13,14 @@ export interface Film {
 	description: string | null;
 	links?: Array<string>;
 	seen? : boolean;
+	createdAt: Date,
+	updatedAt: Date
+}
+
+export type TKeyFilter = keyof Film;
+export type TFilter = {
+	sortedBy:TKeyFilter,
+	order:'asc'|'desc'
 }
 
 export interface CreateFilmRequest {
@@ -37,7 +45,7 @@ export interface UpdateFilmRequest {
 	links?: Array<string>;
 }
 
-export interface IResult<T>{
+export type IResult<T> ={
 	result: T
 	message:string;
 	error?:string;

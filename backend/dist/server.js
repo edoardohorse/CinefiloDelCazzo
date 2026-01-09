@@ -14,6 +14,7 @@ const DOMAIN = process.env.VITE_DOMAIN;
 const BASE_URL = process.env.VITE_BASE_API || "";
 // Initialize Swagger
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
+import packageJson from '../package.json' with { type: 'json' };
 // Middleware
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '20mb' }));
@@ -33,11 +34,6 @@ app.use(`/${BASE_URL}/docs`, swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Initialize controller
 const filmController = new FilmController(BASE_URL);
 const endpoints = filmController.endpoints();
-//<editor-fold desc="server.ts >  - line 48 at 14/12/2025 23:12:42">
-console.group('server.ts >  - line 48 at 14/12/2025 23:12:42');
-console.debug(endpoints);
-console.groupEnd();
-//</editor-fold>
 // app.use(express.static(path.join(dirFrontend, 'dist')));
 /**
  * @swagger
@@ -45,6 +41,21 @@ console.groupEnd();
  *   get:
  *     summary: Get all films
  *     tags: [Films]
+ *     parameters:
+ *        - in: query
+ *          name: sortedBy
+ *          schema:
+ *            type: string
+ *            enum: [releaseDate, createdAt]
+ *            default: title
+ *          description: Field to sort films by
+ *        - in: query
+ *          name: order
+ *          schema:
+ *            type: string
+ *            enum: [asc, desc]
+ *            default: asc
+ *          description: Sort order (ascending or descending)
  *     responses:
  *       200:
  *         description: List of all films
@@ -217,10 +228,10 @@ app.delete(endpoints.deleteFilm, filmController.deleteFilm);
  *                   example: 2023-01-01T00:00:00.000Z
  */
 app.get(endpoints.health, async (req, res) => {
-    const result = { status: 'OK', timestamp: new Date().toISOString() };
+    const result = { status: 'OK', timestamp: new Date().toISOString(), version: packageJson.version };
     await filmController.checkConnection();
     res.json(result);
-    log.success(`Status: ${result.status} - ${result.timestamp}`);
+    log.success(`Status: ${result.status} - ${result.timestamp} - ${packageJson.version}`);
 });
 // Fallback to index.html for SPA routing
 app.get('*', (req, res) => {
