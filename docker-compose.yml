@@ -1,30 +1,33 @@
 services:
-  node-app:
-    image: node:24.0.0-alpine
-    container_name: CinefiloDelCazzoBE
-    working_dir: /app
+  postgres:
+    image: postgres:16-alpine  # Minimal ~150MB image [citation:6]
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     volumes:
-      - ./backend:/app
-      - ./sqlite_data:/app/data
-#      - ./backend/films.db:/backend/app/films.db:rw
-#      - ./package.json:/app/package.json
-#      - ./node_modules:/app/node_modules
-#      - ./dist:/app/dist
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d mydb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  postgrest:
+    image: postgrest/postgrest:latest
+    environment:
+      PGRST_DB_URI: postgresql://root:root@postgres:5432/mydb
+      PGRST_DB_SCHEMA: public
+      PGRST_DB_ANON_ROLE: web_anon
+      PGRST_SERVER_PORT: 3000
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
-#      - NODE_OPTIONS=--max-old-space-size=100
-    command: [ "node", "dist/server.js" ]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
 
-    #    command: npm start
-#    command: npm start
-#    restart: unless-stopped
-#    deploy:
-#      resources:
-#        limits:
-#          memory: 512M
-#          cpus: '0.5'
-#        reservations:
-#          memory: 256M
-#          cpus: '0.25'
+volumes:
+  postgres_data:
