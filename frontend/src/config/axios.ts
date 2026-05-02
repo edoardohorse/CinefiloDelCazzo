@@ -8,6 +8,7 @@ if(DOMAIN.includes('http')){
 	API_URL = `${DOMAIN}/${BASE_API}`;
 }
 
+const BASE_API = import.meta.env.VITE_BASE_URL;
 
 const api = axios.create({
 	baseURL: API_URL,

@@ -9,13 +9,17 @@ export const QUERY_FN_FETCH_FILM_BY_ID = (id:string)=>`/${BASE_URL}/${id}`
 export const QUERY_FN_DELETE_FILM_BY_ID = (id:string)=>`/${BASE_URL}/${id}`
 export const QUERY_FN_UPDATE_FILM_BY_ID = (id:string)=>`/${BASE_URL}/${id}`
 
+function buildOrderFn(opts?: TFilter){
+	if(opts){
+	return `order=${opts.sortedBy}.${opts.order}`;
+
+	}
+	return ''
+}
 
 export async function fetchAllFilm(sortedOptions?: TFilter){
-	const {data} = await api.get(QUERY_FN_FETCH_FILM, {
-		params: {
-			...sortedOptions
-		}
-	});
+
+	const {data} = await api.get(`${QUERY_FN_FETCH_FILM}?${ buildOrderFn(sortedOptions)}`)
 	return data;
 }
 

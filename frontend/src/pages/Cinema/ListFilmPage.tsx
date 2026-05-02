@@ -6,7 +6,7 @@ import {LoadingPage} from "@/pages/LoadingPage";
 import {TFilter, TKeyFilter} from "@cinefilodelcazzo/types";
 import FilterListIcon from '@mui/icons-material/FilterList';
 export const ListFilmPage: FC = () => {
-	const [filterOptions, setFilterOptions] = useState<TFilter>({sortedBy:'createdAt',order:'desc'})
+	const [filterOptions, setFilterOptions] = useState<TFilter>({sortedBy:'created_at',order:'desc'})
 	//<editor-fold desc="ListFilmPage.tsx > ListFilmPage - line 10 at 09/01/2026 22:05:30">
 	console.group('ListFilmPage.tsx > ListFilmPage - line 10 at 09/01/2026 22:05:30');
 	console.debug(filterOptions);

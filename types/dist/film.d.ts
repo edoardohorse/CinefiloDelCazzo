@@ -6,14 +6,14 @@ export type Film = {
     id?: number;
     name: string;
     thumbnail?: string;
-    releaseDate?: string | null;
-    endDate?: string | null;
+    release_date?: string | null;
+    end_date?: string | null;
     type: FilmType;
     description: string | null;
     links?: Array<string>;
     seen?: boolean;
-    createdAt: Date;
-    updatedAt: Date;
+    created_at: Date;
+    updated_at: Date;
 };
 export type TKeyFilter = keyof Film;
 export type TFilter = {
